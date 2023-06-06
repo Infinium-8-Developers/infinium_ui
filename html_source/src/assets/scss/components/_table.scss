@@ -1,0 +1,134 @@
+table {
+  width: 100%;
+  table-layout: fixed;
+
+  .row-divider {
+    height: 1rem;
+    -webkit-transition: 0.2s height linear, 0s font-size;
+    transition: 0.2s height linear, 0s font-size;
+    transition-delay: 0s, 0.2s;
+
+    &.hide {
+      height: 0;
+    }
+  }
+
+  thead {
+    text-align: left;
+    border-radius: 0.8rem;
+    overflow: auto;
+
+    tr {
+      th {
+        background-color: var(--blue-700);
+        z-index: 5;
+        max-width: 10rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .bg {
+          background-color: var(--blue-400);
+        }
+
+        .title {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding: 2rem;
+          width: 100%;
+        }
+
+        &:first-child {
+          .title {
+            border-radius: 0.8rem 0 0 0.8rem;
+          }
+        }
+
+        &:last-child {
+          .title {
+            border-radius: 0 0.8rem 0.8rem 0;
+          }
+        }
+      }
+
+      /** Sticky header */
+      th {
+        position: sticky;
+        top: 0;
+      }
+    }
+  }
+
+  tbody {
+    text-align: left;
+
+    tr {
+      background-color: var(--blue-300);
+      -webkit-transition: 0.5s height linear, 0s font-size;
+      transition: 0.5s height linear, 0s font-size;
+      transition-delay: 0s, 0.5s;
+      height: auto;
+
+      td {
+        padding: 2rem;
+        vertical-align: middle;
+        white-space: nowrap;
+        max-width: 10rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:first-child {
+          border-radius: 0.8rem 0 0 0.8rem;
+        }
+
+        &:last-child {
+          border-radius: 0 0.8rem 0.8rem 0;
+        }
+      }
+
+      &:not(.details) {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.table-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: var(--border);
+  border-radius: 0.8rem;
+  overflow: hidden;
+
+  .separator {
+    border: none;
+    height: 2px;
+    color: var(--gray-800); /* old IE */
+    background-color: var(--gray-800); /* Modern Browsers */
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    min-height: 6rem;
+
+    .label,
+    .text {
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    .label {
+      color: var(--azure-500);
+      background: var(--blue-500);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .text {
+      width: 100%;
+      word-break: break-word;
+    }
+  }
+}

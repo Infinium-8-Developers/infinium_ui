@@ -1,0 +1,258 @@
+i {
+  display: inline-block;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  min-width: 1.8rem;
+  min-height: 1.8rem;
+  transition: all 0.25s ease;
+
+  &.small {
+    min-width: 1.4rem;
+    min-height: 1.4rem;
+  }
+
+  // BLUE
+  &.question-circle {
+    background: center / contain no-repeat
+      url(~src/assets/icons/blue/question-circle.svg);
+  }
+
+  &.info-circle {
+    background: center / contain no-repeat
+      url(~src/assets/icons/blue/info-circle.svg);
+  }
+
+  &.purchase-arrow-down {
+    background: center / contain no-repeat
+      url(~src/assets/icons/blue/purchase-arrow-down.svg);
+  }
+
+  &.purchase-arrow-up {
+    background: center / contain no-repeat
+      url(~src/assets/icons/blue/purchase-arrow-up.svg);
+  }
+
+  // WHITE
+  &.arrow-down-square {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/arrow-down-square.svg);
+  }
+
+  &.add {
+    background: center / contain no-repeat url(~src/assets/icons/white/add.svg);
+  }
+
+  &.balance-icon {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/balance_icon.svg);
+  }
+
+  &.info-icon {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/info_icon.svg);
+  }
+
+  &.arrow-left-stroke {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/arrow-left-stroke.svg);
+  }
+
+  &.arrow-left-slider {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/arrow-left-slider.svg);
+  }
+
+  &.arrow-right-stroke {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/arrow-right-stroke.svg);
+  }
+
+  &.arrow-right-slider {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/arrow-right-slider.svg);
+  }
+
+  &.arrow-up-square {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/arrow-up-square.svg);
+  }
+
+  &.close {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/close.svg);
+  }
+
+  &.close-square {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/close-square.svg);
+  }
+
+  &.check-shield {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/check-shield.svg);
+  }
+
+  &.contacts {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/contacts.svg);
+  }
+
+  &.copy {
+    background: center / contain no-repeat url(~src/assets/icons/white/copy.svg);
+  }
+
+  &.check {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/check.svg);
+  }
+
+  &.check-circle {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/check-circle.svg);
+  }
+
+  &.delete {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/delete.svg);
+  }
+
+  &.options-vertical {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/options-vertical.svg);
+  }
+
+  &.temp {
+    background: center / contain no-repeat url(~src/assets/icons/white/temp.svg);
+  }
+
+  &.document {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/document.svg);
+  }
+
+  &.dots {
+    background: center / contain no-repeat url(~src/assets/icons/white/dots.svg);
+  }
+
+  &.dropdown-arrow-down {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/dropdown-arrow-down.svg);
+  }
+
+  &.dropdown-arrow-left {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/dropdown-arrow-left.svg);
+  }
+
+  &.dropdown-arrow-right {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/dropdown-arrow-right.svg);
+  }
+
+  &.dropdown-arrow-up {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/dropdown-arrow-up.svg);
+  }
+
+  &.edit-square {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/edit-square.svg);
+  }
+
+  &.export {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/export.svg);
+  }
+
+  &.logout {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/logout.svg);
+  }
+
+  &.plus {
+    background: center / contain no-repeat url(~src/assets/icons/white/plus.svg);
+  }
+
+  &.settings {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/settings.svg);
+  }
+
+  &.staking {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/staking.svg);
+  }
+
+  &.time-circle {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/time-circle.svg);
+  }
+
+  &.wallet-options {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/wallet-options.svg);
+  }
+
+  &.update {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/update.svg);
+  }
+
+  &.lock-transaction {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/lock-transaction.svg);
+  }
+
+  &.unlock-transaction {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/unlock-transaction.svg);
+  }
+
+  &.modal-info {
+    background: center / contain no-repeat
+      url(~src/assets/icons/white/modal-info.svg);
+  }
+
+  // orange
+  &.time-orange {
+    background: center / contain no-repeat
+      url(~src/assets/icons/orange/time.svg);
+  }
+
+  // red
+  &.unsecured {
+    background: center / contain no-repeat
+      url(~src/assets/icons/red/unsecured.svg);
+  }
+
+  &.new {
+    background: center / contain no-repeat url(~src/assets/icons/red/new.svg);
+  }
+
+  &.alert {
+    background: center / contain no-repeat url(~src/assets/icons/red/alert.svg);
+  }
+
+  &.error {
+    background: center / contain no-repeat
+      url(~src/assets/icons/red/modal-alert.svg);
+  }
+
+  // aqua
+  &.secured {
+    background: center / contain no-repeat
+      url(~src/assets/icons/aqua/secured.svg);
+  }
+
+  &.success {
+    background: center / contain no-repeat
+      url(~src/assets/icons/aqua/modal-success.svg);
+  }
+}

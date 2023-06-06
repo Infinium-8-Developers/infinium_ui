@@ -1,0 +1,346 @@
+.form {
+  max-width: 50rem;
+  width: 100%;
+  border-radius: 0.8rem;
+
+  &__field {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    width: 100%;
+
+    &--input {
+      /* If input is not empty */
+      &:not(:placeholder-shown):not(.invalid):not(.ng-invalid) {
+        /* You need to add a placeholder to your fields. For example: <input "placeholder=" "/> */
+        border: var(--border-not-empty);
+      }
+
+      &:not(:placeholder-shown) {
+        &.invalid,
+        &.ng-touched.ng-invalid {
+          border: var(--border-error);
+        }
+      }
+
+      /* If input is empty */
+      &:placeholder-shown {
+        border: var(--border);
+      }
+    }
+
+    label {
+      margin-bottom: 0.8rem;
+      color: var(--azure-500);
+    }
+
+    &--row {
+      display: flex;
+      flex: 0 0 auto;
+
+      > div {
+        max-width: calc(50% - 1rem);
+        width: 100%;
+
+        &:first-child {
+          margin-right: 1rem;
+        }
+
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    &--input,
+    &--select {
+      border: var(--border);
+      border-radius: 0.8rem;
+      outline: none;
+      padding: 0 1.2rem;
+      width: 100%;
+      height: 4rem;
+      background-color: transparent;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--white-500);
+      font-size: 1.8rem;
+      line-height: 1.2;
+      transition: border 0.2s ease-in-out;
+
+      &:disabled {
+        border: var(--border-disabled);
+        cursor: not-allowed;
+      }
+
+      &:read-only {
+        cursor: not-allowed;
+      }
+
+      &:not(:disabled):not(:read-only) {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &::placeholder {
+        color: var(--gray-800);
+      }
+
+      &.invalid,
+      &.ng-touched.ng-invalid {
+        border: var(--border-error);
+
+        &::placeholder {
+          color: var(--red-500);
+        }
+      }
+
+      &:not(:disabled):not(:read-only) {
+        &:hover {
+          border: var(--border-not-empty);
+
+          &.invalid,
+          &.ng-touched.ng-invalid {
+            border: var(--border-error);
+
+            &::placeholder {
+              color: var(--red-500);
+            }
+          }
+        }
+      }
+    }
+
+    &.textarea {
+      width: 100%;
+      height: auto;
+
+      textarea {
+        border: var(--border);
+        border-radius: 0.8rem;
+        outline: none;
+        padding: 1rem;
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        min-height: 7.5rem;
+        max-height: 7.5rem;
+        overflow: auto;
+        resize: none;
+        background-color: transparent;
+        color: var(--white-500);
+        font-size: 1.8rem;
+        line-height: 1.2;
+
+        &:disabled {
+          border: var(--border-disabled);
+          cursor: not-allowed;
+        }
+
+        &:not(:disabled) {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        &::placeholder {
+          color: var(--gray-800);
+        }
+
+        /* If input is not empty */
+        &:not(:placeholder-shown) {
+          /* You need to add a placeholder to your fields. For example: <input "placeholder=" "/> */
+          border: var(--border-not-empty);
+        }
+
+        /* If input is empty */
+        &:placeholder-shown {
+          border: var(--border);
+        }
+
+        .ng-touched {
+          .ng-invalid {
+            border: var(--border-error);
+          }
+        }
+
+        &.invalid {
+          border: var(--border-error);
+
+          &::placeholder {
+            color: var(--red-500);
+          }
+        }
+      }
+    }
+
+    .error,
+    .success,
+    .info {
+      overflow: hidden;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .error {
+      color: var(--red-500);
+    }
+
+    .success {
+      color: var(--aqua-500);
+    }
+
+    &-dropdown {
+      position: relative;
+
+      .dropdown {
+        overflow-y: auto;
+        position: absolute;
+        top: calc(100% + 1rem);
+        left: 0;
+        max-width: 100%;
+        width: 100%;
+        max-height: 15rem;
+        border: var(--border);
+      }
+    }
+  }
+
+  .details {
+    .header {
+      padding: 1.2rem 2rem;
+      width: 100%;
+      max-width: 20rem;
+      background-color: var(--blue-500);
+      border-radius: 0.8rem 0.8rem 0 0;
+
+      &.border-radius-all {
+        border-radius: 0.8rem;
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      background-color: var(--blue-500);
+      border-radius: 0 0.8rem 0.8rem 0.8rem;
+    }
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  min-height: 2.4rem;
+  overflow: hidden;
+
+  label {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    min-height: 2.4rem;
+    line-height: 2.4rem;
+    padding-left: 3.6rem;
+    color: var(--white-500);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input[readonly] {
+    & + label {
+      pointer-events: none;
+    }
+
+    & + label:before {
+      pointer-events: none;
+    }
+  }
+
+  input[type='checkbox'] {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    visibility: hidden;
+
+    & + label {
+      position: relative;
+    }
+
+    & + label:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 2.4rem;
+      height: 2.4rem;
+      transition: all 0.2s ease-in-out;
+      background-image: url('~src/assets/icons/white/checkbox.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    &:not(:disabled) + label:hover:before {
+      background-image: url('~src/assets/icons/white/checkbox-hover.svg');
+    }
+
+    &:checked {
+      & + label:before,
+      & + label:hover:before {
+        background-image: url('~src/assets/icons/white/checkbox-active.svg');
+      }
+    }
+
+    &:disabled {
+      & + label {
+        cursor: not-allowed;
+      }
+
+      & + label:before {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  border-radius: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  width: 3.6rem;
+  height: 2.2rem;
+  transition: all 0.2s ease-in-out;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.on {
+    justify-content: flex-end;
+    background-color: var(--aqua-500);
+  }
+
+  &.off {
+    justify-content: flex-start;
+    background-color: var(--gray-800);
+  }
+
+  .circle {
+    border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: var(--white-500);
+    box-shadow: var(--shadow-gray);
+  }
+}

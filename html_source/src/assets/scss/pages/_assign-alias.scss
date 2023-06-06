@@ -1,0 +1,26 @@
+app-assign-alias {
+  .assign-alias-tooltip {
+    z-index: 999;
+    max-width: 46rem;
+    background-color: var(--blue-450);
+    color: var(--white-500);
+  }
+
+  .has-no-edit-symbol {
+    position: relative;
+    width: 100%;
+
+    input {
+      padding-left: 2.35rem;
+    }
+
+    &:after {
+      content: '@';
+      position: absolute;
+      display: inline-block;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+    }
+  }
+}

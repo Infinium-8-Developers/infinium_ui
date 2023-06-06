@@ -1,0 +1,28 @@
+.ngx-contextmenu {
+  &--dropdown-menu {
+    border: none;
+    padding: 0;
+    background-color: var(--chartOptionsBackgroundColor);
+    box-shadow: var(--shadow-black-300);
+  }
+
+  li {
+    display: block;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  button {
+    display: block;
+    padding: 0.5em 1em;
+    color: var(--white-500);
+    border-radius: 0;
+    width: 100%;
+
+    &:hover {
+      background-color: var(--chartOptionsHoverColor);
+      color: var(--white-500);
+    }
+  }
+}

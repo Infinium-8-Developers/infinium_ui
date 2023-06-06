@@ -1,0 +1,13 @@
+app-progress-container {
+  .progress-bar-container {
+    color: var(--white-500);
+
+    .progress-bar {
+      background-color: var(--blue-300);
+
+      .progress-bar-full {
+        background-color: var(--azure-500);
+      }
+    }
+  }
+}

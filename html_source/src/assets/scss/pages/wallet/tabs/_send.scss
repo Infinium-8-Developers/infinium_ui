@@ -1,0 +1,35 @@
+app-send {
+  .container {
+    .form {
+      .wrap {
+        border: var(--border);
+
+        .title {
+          font-size: 100%;
+          margin-bottom: 1.5rem;
+          color: var(--azure-500);
+
+          .icon {
+            width: 2rem;
+            height: 2rem;
+            float: right;
+          }
+        }
+
+        .text-wrap {
+          margin: 1.5rem;
+          font-size: 1.5rem;
+        }
+
+        table tr {
+          background-color: transparent;
+
+          td:first-child {
+            width: 22.5rem;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+}

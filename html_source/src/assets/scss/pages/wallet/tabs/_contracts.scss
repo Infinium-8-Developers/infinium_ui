@@ -1,0 +1,50 @@
+app-contracts {
+  .container {
+    .wrap-table {
+      table.contracts-table {
+        tbody {
+          tr {
+            cursor: pointer;
+            outline: none !important;
+
+            .contract {
+              position: relative;
+
+              .icon {
+                flex-shrink: 0;
+
+                &.new {
+                  width: 1.7rem;
+                  height: 1.7rem;
+                }
+
+                &.alert {
+                  width: 1.7rem;
+                  height: 1.2rem;
+                }
+
+                &.purchase,
+                &.sell {
+                  width: 1.5rem;
+                  height: 1.5rem;
+                }
+              }
+
+              span {
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+            }
+
+            .status,
+            .comment {
+              text-overflow: ellipsis;
+              overflow: hidden;
+              max-width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
