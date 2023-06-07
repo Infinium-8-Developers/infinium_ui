@@ -1,0 +1,89 @@
+button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-500);
+  transition: all 0.25s ease;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0.8rem;
+  font-size: 1.8rem;
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // button size for (primary, outline)
+  &.primary,
+  &.outline {
+    &.small {
+      min-height: 4.5rem;
+    }
+
+    &.big {
+      min-height: 5.3rem;
+    }
+  }
+
+  &.primary {
+    background-color: var(--azure-500);
+
+    &:not(:disabled) {
+      &:focus,
+      &:hover,
+      &.active {
+        background-color: var(--azure-600);
+      }
+    }
+  }
+
+  &.outline {
+    border: 0.2rem solid var(--azure-500);
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus,
+      &.active {
+        background-color: var(--gray-900);
+      }
+    }
+  }
+
+  // button size for circle
+  &.btn-icon {
+    min-width: 2rem;
+    min-height: 2rem;
+
+    &.small {
+      min-width: 2.8rem;
+      min-height: 2.8rem;
+    }
+
+    &.big {
+      min-width: 4rem;
+      min-height: 4rem;
+    }
+  }
+
+  &.btn-icon {
+    background-color: var(--gray-900);
+    transition: background-color 0.2s ease-in-out;
+
+    &.circle {
+      border-radius: 50%;
+    }
+
+    &:hover {
+      background-color: var(--gray-700);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.alias {
+  display: flex;
+  align-items: center;
+  &.available {
+    padding: 0.4rem 1.6rem;
+    min-height: 3.2rem;
+    background: var(--gradietAquaToBlue);
+    border-radius: 0.8rem;
+    position: relative;
+
+    &:after {
+      display: block;
+      content: '';
+      width: 1.4rem;
+      height: 1.4rem;
+      overflow: hidden;
+      position: absolute;
+      right: -0.4rem;
+      top: -0.4rem;
+      background-image: url('~src/assets/icons/white/crown.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+}

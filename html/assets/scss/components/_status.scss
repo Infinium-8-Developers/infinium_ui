@@ -1,0 +1,185 @@
+app-synchronization-status {
+  width: 100%;
+}
+
+.synchronization-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--white-500);
+  width: 100%;
+
+  .status-container {
+    position: relative;
+    width: 100%;
+
+    .offline,
+    .online {
+      display: flex;
+      width: 100%;
+
+      span {
+        position: relative;
+        padding-left: 2.2rem;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          border-radius: 50%;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+
+    .offline > span:before {
+      background-color: var(--red-500);
+    }
+
+    .online > span:before {
+      background-color: var(--aqua-500);
+    }
+
+    .syncing,
+    .loading {
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 0.6rem;
+
+      .syncing {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 0.4rem;
+
+        .progress-bar {
+          border-radius: 0.2rem;
+          height: 0.6rem;
+          width: 100%;
+          overflow: hidden;
+          background-color: var(--gray-900);
+
+          .fill {
+            border-radius: 0.2rem;
+            height: 100%;
+            background-color: var(--aqua-500);
+          }
+        }
+
+        .progress-percent {
+          color: var(--aqua-500);
+          font-size: 1.4rem;
+          line-height: 1.2;
+          padding-left: 1rem;
+        }
+      }
+
+      .loading {
+        background-color: var(--aqua-500);
+        animation: move 5s linear infinite;
+        background-image: -webkit-gradient(
+            linear,
+            0 0,
+            100% 100%,
+            color-stop(0.125, rgba(0, 0, 0, 0.15)),
+            color-stop(0.125, transparent),
+            color-stop(0.25, transparent),
+            color-stop(0.25, rgba(0, 0, 0, 0.1)),
+            color-stop(0.375, rgba(0, 0, 0, 0.1)),
+            color-stop(0.375, transparent),
+            color-stop(0.5, transparent),
+            color-stop(0.5, rgba(0, 0, 0, 0.15)),
+            color-stop(0.625, rgba(0, 0, 0, 0.15)),
+            color-stop(0.625, transparent),
+            color-stop(0.75, transparent),
+            color-stop(0.75, rgba(0, 0, 0, 0.1)),
+            color-stop(0.875, rgba(0, 0, 0, 0.1)),
+            color-stop(0.875, transparent),
+            to(transparent)
+          ),
+          -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.125, rgba(0, 0, 0, 0.3)), color-stop(0.125, transparent), color-stop(0.25, transparent), color-stop(0.25, rgba(0, 0, 0, 0.25)), color-stop(0.375, rgba(0, 0, 0, 0.25)), color-stop(0.375, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(0, 0, 0, 0.3)), color-stop(0.625, rgba(0, 0, 0, 0.3)), color-stop(0.625, transparent), color-stop(0.75, transparent), color-stop(0.75, rgba(0, 0, 0, 0.25)), color-stop(0.875, rgba(0, 0, 0, 0.25)), color-stop(0.875, transparent), to(transparent));
+        background-size: 7rem 7rem;
+        height: 100%;
+      }
+    }
+  }
+
+  .update-container {
+    display: flex;
+    align-items: center;
+    text-align: right;
+
+    .update-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: center;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      text-align: left;
+
+      &.time {
+        font-size: 1.1rem;
+      }
+    }
+
+    .icon {
+      flex: 1 0 auto;
+      margin: 0.3rem 0 0 0.6rem;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .standard {
+      color: var(--aqua-500);
+    }
+
+    .important {
+      color: var(--orange-500);
+    }
+
+    .critical {
+      color: var(--red-500);
+    }
+
+    .time-orange {
+      color: var(--orange-500);
+    }
+
+    .icon {
+      &.standard {
+        .st0 {
+          fill: var(--aqua-500);
+        }
+      }
+
+      &.important {
+        .st0 {
+          fill: var(--orange-500);
+        }
+      }
+
+      &.critical {
+        .st0 {
+          fill: var(--red-500);
+        }
+      }
+    }
+  }
+}
+
+@keyframes move {
+  0% {
+    background-position: 100% -7rem;
+  }
+  100% {
+    background-position: 100% 7rem;
+  }
+}

@@ -1,0 +1,47 @@
+.preloader {
+  align-self: center;
+  color: white;
+  font-size: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  width: 50%;
+
+  .loading-bar {
+    display: block;
+    animation: move 5s linear infinite;
+    background-color: var(--azure-500);
+    background-image: -webkit-gradient(
+        linear,
+        0 0,
+        100% 100%,
+        color-stop(0.125, rgba(0, 0, 0, 0.15)),
+        color-stop(0.125, transparent),
+        color-stop(0.25, transparent),
+        color-stop(0.25, rgba(0, 0, 0, 0.1)),
+        color-stop(0.375, rgba(0, 0, 0, 0.1)),
+        color-stop(0.375, transparent),
+        color-stop(0.5, transparent),
+        color-stop(0.5, rgba(0, 0, 0, 0.15)),
+        color-stop(0.625, rgba(0, 0, 0, 0.15)),
+        color-stop(0.625, transparent),
+        color-stop(0.75, transparent),
+        color-stop(0.75, rgba(0, 0, 0, 0.1)),
+        color-stop(0.875, rgba(0, 0, 0, 0.1)),
+        color-stop(0.875, transparent),
+        to(transparent)
+      ),
+      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.125, rgba(0, 0, 0, 0.3)), color-stop(0.125, transparent), color-stop(0.25, transparent), color-stop(0.25, rgba(0, 0, 0, 0.25)), color-stop(0.375, rgba(0, 0, 0, 0.25)), color-stop(0.375, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(0, 0, 0, 0.3)), color-stop(0.625, rgba(0, 0, 0, 0.3)), color-stop(0.625, transparent), color-stop(0.75, transparent), color-stop(0.75, rgba(0, 0, 0, 0.25)), color-stop(0.875, rgba(0, 0, 0, 0.25)), color-stop(0.875, transparent), to(transparent));
+    background-size: 10rem 10rem;
+    width: 100%;
+    height: 1rem;
+  }
+}
+
+@keyframes move {
+  0% {
+    background-position: 100% -10rem;
+  }
+  100% {
+    background-position: 100% 10rem;
+  }
+}

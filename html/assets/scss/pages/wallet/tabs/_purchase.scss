@@ -1,0 +1,94 @@
+app-purchase {
+  .container {
+    position: relative;
+    // TODO - Uncomment when progress returns
+    //padding-bottom: 4rem; // height progress-bar + 1rem
+
+    .form {
+      max-width: 100%;
+    }
+
+    .details {
+      .content {
+        .form__field--row {
+          > div {
+            flex: 0 1 22rem;
+            margin-right: 2rem;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .purchase-buttons {
+      button {
+        flex: 0 1 33%;
+        margin-right: 0.5rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .nullify-block-row {
+      .nullify-block-buttons {
+        button {
+          flex: 0 1 25%;
+          margin: 0 0.5rem;
+        }
+      }
+    }
+
+    .time-cancel-block-row {
+      .form__field {
+        width: 25%;
+      }
+
+      .time-cancel-block-buttons {
+        button {
+          flex: 0 1 25%;
+          margin: 0 0.5rem;
+        }
+      }
+    }
+  }
+
+  // TODO - Uncomment when progress returns
+  //.progress-bar-container {
+  //  position: absolute;
+  //  bottom: 0;
+  //  left: 0;
+  //  padding: 0 3rem;
+  //  width: 100%;
+  //  height: 3rem;
+  //
+  //  .progress-bar {
+  //    position: absolute;
+  //    top: -0.7rem;
+  //    left: 0;
+  //    margin: 0 3rem;
+  //    width: calc(100% - 6rem);
+  //    height: 0.7rem;
+  //
+  //    .progress-bar-full {
+  //      height: 0.7rem;
+  //    }
+  //  }
+  //
+  //  .progress-labels {
+  //    font-size: 1.2rem;
+  //  }
+  //
+  //  .progress-time {
+  //    position: absolute;
+  //    top: -3rem;
+  //    left: 50%;
+  //    transform: translateX(-50%);
+  //    font-size: 1.2rem;
+  //  }
+  //}
+}

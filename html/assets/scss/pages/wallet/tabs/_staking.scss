@@ -1,0 +1,35 @@
+app-staking {
+  .chart {
+    &-header {
+      .selected-group {
+        min-width: 19rem;
+      }
+
+      .items {
+        .item {
+          min-width: 18rem;
+          max-width: 25rem;
+          min-height: 4rem;
+          border: var(--border);
+
+          .left {
+            min-width: fit-content;
+            width: auto;
+          }
+        }
+      }
+    }
+
+    & {
+      position: relative;
+      border: var(--border);
+      min-height: 29rem;
+
+      > div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

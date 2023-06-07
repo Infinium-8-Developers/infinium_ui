@@ -1,0 +1,23 @@
+app-login {
+  .auth {
+    position: relative;
+
+    app-synchronization-status {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+}
+
+app-no-wallet {
+  .no-wallet-wrapper {
+    position: relative;
+
+    app-synchronization-status {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+}

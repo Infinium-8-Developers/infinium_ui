@@ -1,0 +1,57 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  flex: 0 0 auto;
+
+  &.scrolled {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .breadcrumb {
+    flex: 0 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > span,
+    a {
+      white-space: nowrap;
+      color: var(--white-500);
+      outline-style: none;
+      transition: opacity 0.2s ease-in-out;
+      opacity: 0.75;
+    }
+
+    a {
+      cursor: pointer;
+    }
+
+    &:last-child,
+    &:hover {
+      > span,
+      a {
+        opacity: 1;
+      }
+    }
+
+    &:not(:last-child) {
+      position: relative;
+      padding-right: 3.5rem;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0.8rem;
+        transform: translateY(-50%);
+        width: 1.8rem;
+        height: 1.8rem;
+        background: center / contain no-repeat
+          url(~src/assets/icons/white/dropdown-arrow-right.svg);
+      }
+    }
+  }
+}
