@@ -1,0 +1,31 @@
+<div class="container overflow-auto"
+     fxLayout="column"
+     fxLayoutAlign="center center"
+     fxFlexFill>
+    <div class="wrap-qr overflow-hidden border-radius-0_8-rem mb-2"
+         fxLayout="column"
+         fxFlex="0 0 auto"
+         fxLayoutAlign="center center">
+        <img src="{{qrImageSrc}}"
+             alt="qr-code">
+    </div>
+
+    <div class="address border-radius-0_8-rem overflow-hidden pl-1 pr-0_5 pt-0_5 pb-0_5"
+         fxLayout="row"
+         fxFlex="0 0 auto"
+         fxLayoutAlign="space-between center">
+        <span
+          [tooltip]="variablesService.currentWallet.address"
+          [placement]="'bottom'"
+          [tooltipClass]="'table-tooltip'"
+          [delay]="150"
+          [timeout]="0"
+          class="text-ellipsis mr-1">{{ variablesService.currentWallet.address | slice:0:9 }}...{{ variablesService.currentWallet.address | slice:-9 }}</span>
+        <button (click)="copyAddress()"
+                class="btn-icon circle small">
+            <i class="icon small"
+               [class.copy]="!copyAnimation"
+               [class.check]="copyAnimation"></i>
+        </button>
+    </div>
+</div>

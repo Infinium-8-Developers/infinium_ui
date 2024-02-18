@@ -1,0 +1,43 @@
+<div class="no-wallet-wrapper"
+     fxLayout="row"
+     fxLayoutAlign="center center"
+     fxFlexFill>
+    <div class="card max-w-42-rem max-h-100 w-100 p-2 border-radius-0_8-rem bg-light-blue scrolled-content">
+
+        <div class="logo mb-3"
+             fxLayout="row"
+             fxLayoutAlign="center center">
+            <img src="assets/icons/blue/infinium-logo.svg"
+                 alt="infinium-logo">
+        </div>
+
+        <h4 class="mb-2 text-align-center">{{ 'MAIN.TITLE' | translate }}</h4>
+
+        <button type="button"
+                class="primary big w-100 mb-1"
+                [routerLink]="['/' + paths.create]">
+            {{ 'MAIN.BUTTON_NEW_WALLET' | translate}}
+        </button>
+
+        <button type="button"
+                class="primary big w-100 mb-1"
+                (click)="openWallet()">{{ 'MAIN.BUTTON_OPEN_WALLET' | translate
+            }}</button>
+
+        <button type="button"
+                class="outline big w-100 mb-2"
+                [routerLink]="['/' + paths.restore]">{{ 'MAIN.BUTTON_RESTORE_BACKUP' |
+              translate
+            }}</button>
+
+        <p class="text-align-center cursor-pointer"
+           fxLayout="row"
+           fxLayoutAlign="center center"
+           (click)="openInBrowser()">
+            <i class="icon question-circle mr-1"></i>
+            <span class="color-primary">{{ 'MAIN.HELP' | translate }}</span>
+        </p>
+    </div>
+
+    <app-synchronization-status class="max-w-19-rem"></app-synchronization-status>
+</div>

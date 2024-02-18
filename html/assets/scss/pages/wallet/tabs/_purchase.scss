@@ -24,6 +24,7 @@ app-purchase {
     }
 
     .purchase-buttons {
+
       button {
         flex: 0 1 33%;
         margin-right: 0.5rem;
@@ -44,9 +45,11 @@ app-purchase {
     }
 
     .time-cancel-block-row {
+
       .form__field {
         width: 25%;
       }
+
 
       .time-cancel-block-buttons {
         button {

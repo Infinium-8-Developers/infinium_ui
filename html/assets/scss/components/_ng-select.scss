@@ -1,6 +1,6 @@
 @mixin rtl {
-  @at-root [dir='rtl'] #{&} {
-    @content;
+  @at-root [dir="rtl"] #{&} {
+    @content
   }
 }
 
@@ -33,7 +33,7 @@ $ng-select-dropdown-option-disabled: $ng-select-primary-text !default;
 
 $ng-select-input-text: var(--white-500) !default;
 
-$circle-border: 0.2rem solid white !default;
+$circle-border: 0.15rem solid white !default;
 $circle-background: white !default;
 
 .ng-select {
@@ -54,8 +54,7 @@ $circle-background: white !default;
         justify-content: center;
         min-width: 1.8rem;
         min-height: 1.8rem;
-        background: center / contain no-repeat
-          url(~src/assets/icons/white/dropdown-arrow-up.svg);
+        background: center / contain no-repeat url(~src/assets/icons/white/dropdown-arrow-up.svg);
       }
     }
 
@@ -113,7 +112,7 @@ $circle-background: white !default;
     color: $ng-select-primary-text;
     background-color: $ng-select-bg;
     border-radius: $ng-select-border-radius;
-    border: 0.2rem solid $ng-select-bg;
+    border: 0.15rem solid $ng-select-bg;
     min-height: $ng-select-height;
     transition: border 0.2s ease-in-out;
     cursor: pointer !important;
@@ -121,7 +120,7 @@ $circle-background: white !default;
     // &.ng-has-value show border if select has value
     &:hover {
       box-shadow: none;
-      border: 0.2rem solid $ng-select-border;
+      border: 0.15rem solid $ng-select-border;
     }
 
     .ng-value-container {
@@ -169,7 +168,7 @@ $circle-background: white !default;
 
       > .ng-select-container .ng-value-container .ng-value {
         background-color: $ng-select-disabled-text;
-        border: 0.2rem solid $ng-select-border;
+        border: 0.15rem solid $ng-select-border;
 
         .ng-value-label {
           padding: 0 0.5rem;
@@ -183,7 +182,7 @@ $circle-background: white !default;
         padding-left: 0.7rem;
         @include rtl {
           padding-right: 0.7rem;
-          padding-left: 0;
+          padding-left: 0
         }
 
         .ng-value {
@@ -270,7 +269,7 @@ $circle-background: white !default;
     color: $ng-select-border;
 
     &:hover .ng-clear {
-      color: #d0021b;
+      color: #D0021B;
     }
   }
 
@@ -302,15 +301,12 @@ $circle-background: white !default;
       justify-content: center;
       min-width: 1.8rem;
       min-height: 1.8rem;
-      background: center / contain no-repeat
-        url(~src/assets/icons/white/dropdown-arrow-down.svg);
+      background: center / contain no-repeat url(~src/assets/icons/white/dropdown-arrow-down.svg);
     }
   }
 
-  &.invalid,
-  &.ng-touched.ng-invalid {
-    > .ng-select-container,
-    .ng-dropdown-panel {
+  &.invalid, &.ng-touched.ng-invalid  {
+    > .ng-select-container, .ng-dropdown-panel {
       border: var(--border-error);
     }
   }
@@ -318,7 +314,7 @@ $circle-background: white !default;
 
 .ng-dropdown-panel {
   background-color: $ng-select-dropdown-bg;
-  border: 0.2rem solid $ng-select-dropdown-border;
+  border: 0.15rem solid $ng-select-dropdown-border;
   box-shadow: none;
   left: 0;
 
@@ -418,8 +414,7 @@ $circle-background: white !default;
         background-color: $ng-select-marked;
       }
 
-      &.ng-option-selected,
-      &.ng-option-selected.ng-option-marked {
+      &.ng-option-selected, &.ng-option-selected.ng-option-marked {
         color: $ng-select-dropdown-optgroup-marked;
         background-color: $ng-select-selected;
         font-weight: 600;
@@ -431,8 +426,7 @@ $circle-background: white !default;
       color: $ng-select-dropdown-option-text;
       padding: 0.8rem 1rem;
 
-      &.ng-option-selected,
-      &.ng-option-selected.ng-option-marked {
+      &.ng-option-selected, &.ng-option-selected.ng-option-marked {
         color: $ng-select-selected-text;
         background-color: $ng-select-selected;
 

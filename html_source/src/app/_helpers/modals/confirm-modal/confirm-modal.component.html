@@ -1,0 +1,30 @@
+<div class="modal p-2 border-radius-0_8-rem bg-light-blue max-w-54-rem w-100 max-h-100">
+    <button type="button"
+            class="close"
+            (click)="close()"><i class="icon close"></i></button>
+
+    <div class="content mb-2"
+         fxLayout="row"
+         fxLayoutAlign="center center"
+         fxLayoutGap="1rem">
+        <i class="icon modal-info"></i>
+
+        <div fxLayout="column"
+             fxLayoutAlign="start stretch">
+            <h3 class="title">{{title}}</h3>
+            <p class="message">{{message}}</p>
+        </div>
+    </div>
+
+    <div class="controls"
+         fxLayout="row nowrap"
+         fxLayoutGap="1rem">
+        <button type="button"
+                class="outline big w-100"
+                (click)="close()">{{ 'MODALS.CANCEL' | translate }}</button>
+        <button type="button"
+                class="primary big w-100"
+                (click)="onSubmit()"
+                #btn>{{ 'MODALS.OK' | translate }}</button>
+    </div>
+</div>

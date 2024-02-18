@@ -1,0 +1,74 @@
+<div class="page-container">
+
+    <div class="toolbar mb-2">
+        <div class="left">
+            <button type="button"
+                    class="btn-icon circle big mr-2"
+                    (click)="back()">
+                <i class="icon dropdown-arrow-left"></i>
+            </button>
+            <h1>{{ 'BREADCRUMBS.EDIT_ALIAS' | translate }}</h1>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="page-content">
+        <div class="breadcrumbs mb-2">
+            <div class="breadcrumb">
+                <a [routerLink]="['/wallet/history']">{{ wallet.name }}</a>
+            </div>
+            <div class="breadcrumb">
+                <span>{{ 'BREADCRUMBS.EDIT_ALIAS' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="scrolled-content">
+            <form class="form">
+
+                <div class="form__field">
+                    <label for="alias-name">
+                        {{ 'EDIT_ALIAS.NAME.LABEL' | translate }}
+                    </label>
+                    <input class="form__field--input"
+                           type="text"
+                           id="alias-name"
+                           [value]="alias.name"
+                           placeholder="{{ 'EDIT_ALIAS.NAME.PLACEHOLDER' | translate }}"
+                           readonly>
+                </div>
+
+                <div class="form__field textarea">
+                    <label for="alias-comment">
+                        {{ 'EDIT_ALIAS.COMMENT.LABEL' | translate }}
+                    </label>
+                    <textarea id="alias-comment"
+                              [(ngModel)]="alias.comment"
+                              [ngModelOptions]="{standalone: true}"
+                              [maxlength]="variablesService.maxCommentLength"
+                              (contextmenu)="variablesService.onContextMenu($event)"
+                              placeholder="{{ 'EDIT_ALIAS.COMMENT.PLACEHOLDER' | translate }}">
+            </textarea>
+                    <div class="error"
+                         *ngIf="alias.comment.length > 0 && notEnoughMoney">
+                        {{ 'EDIT_ALIAS.FORM_ERRORS.NO_MONEY' | translate }}
+                    </div>
+                    <div class="error"
+                         *ngIf="alias.comment.length >= variablesService.maxCommentLength">
+                        {{ 'EDIT_ALIAS.FORM_ERRORS.MAX_LENGTH' | translate }}
+                    </div>
+                </div>
+
+                <div class="alias-cost mb-2">{{ "EDIT_ALIAS.COST" | translate : {
+                    value: variablesService.default_fee, currency:
+                    variablesService.defaultCurrency
+                } }}</div>
+
+                <button type="button"
+                        class="primary big w-100"
+                        (click)="updateAlias()"
+                        [disabled]="notEnoughMoney || (oldAliasComment === alias.comment) || alias.comment.length > variablesService.maxCommentLength">{{
+                    'EDIT_ALIAS.BUTTON_EDIT' | translate }}</button>
+            </form>
+        </div>
+    </div>
+</div>

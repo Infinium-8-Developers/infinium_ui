@@ -1,0 +1,105 @@
+<div class="page-container">
+
+    <div class="toolbar mb-2">
+        <div class="left">
+            <button type="button"
+                    class="btn-icon circle big mr-2"
+                    (click)="back()">
+                <i class="icon dropdown-arrow-left"></i>
+            </button>
+            <h1>{{ 'CONTACTS.ADD_CONTACT' | translate }}</h1>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="page-content">
+        <div class="breadcrumbs mb-2">
+            <div class="breadcrumb">
+                <a [routerLink]="['/contacts']">{{'CONTACTS.TITLE' | translate}}</a>
+            </div>
+            <div class="breadcrumb">
+                <span>{{ 'CONTACTS.ADD_CONTACT' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="scrolled-content">
+            <form class="form"
+                  [formGroup]="addContactForm"
+                  (ngSubmit)="add()">
+                <div class="form__field form__field-name">
+                    <label for="add-name">{{ 'CONTACTS.FORM.NAME' | translate }}</label>
+                    <input type="text"
+                           id="add-name"
+                           class="form__field--input"
+                           [placeholder]="'PLACEHOLDERS.NAME_PLACEHOLDER' | translate"
+                           formControlName="name"
+                           (contextmenu)="variablesService.onContextMenu($event)">
+                    <div class="error"
+                         *ngIf="addContactForm.controls['name'].invalid && (addContactForm.controls['name'].dirty || addContactForm.controls['name'].touched)">
+                        <div
+                              *ngIf="addContactForm.controls['name'].errors['minlength'] || addContactForm.controls['name'].errors['maxlength']">
+                            {{ 'CONTACTS.FORM_ERRORS.NAME_LENGTH' | translate }}
+                        </div>
+                        <div *ngIf="addContactForm.controls['name'].errors['dublicated']">
+                            {{ 'CONTACTS.FORM_ERRORS.NAME_DUBLICATED' | translate }}
+                        </div>
+                        <div *ngIf="addContactForm.controls['name'].errors['required']">
+                            {{ 'CONTACTS.FORM_ERRORS.NAME_REQUIRED' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form__field form__field-dropdown">
+                    <label for="address">{{ 'CONTACTS.FORM.ADDRESS' | translate }}</label>
+
+                    <input type="text"
+                           id="address"
+                           class="form__field--input"
+                           [placeholder]="'PLACEHOLDERS.ADRESS_PLACEHOLDER' | translate"
+                           formControlName="address"
+                           (contextmenu)="variablesService.onContextMenu($event)">
+
+                    <div class="error"
+                         *ngIf="addContactForm.controls['address'].invalid && (addContactForm.controls['address'].dirty || addContactForm.controls['address'].touched)">
+                        <div *ngIf="addContactForm.controls['address'].errors['address_not_valid']">
+                            {{ 'CONTACTS.FORM_ERRORS.ADDRESS_NOT_VALID' | translate }}
+                        </div>
+                        <div *ngIf="addContactForm.controls['address'].errors['dublicated']">
+                            {{ 'CONTACTS.FORM_ERRORS.ADDRESS_DUBLICATED' | translate }}
+                        </div>
+                        <div *ngIf="addContactForm.controls['address'].errors['required']">
+                            {{ 'CONTACTS.FORM_ERRORS.ADDRESS_REQUIRED' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form__field form__field-notes">
+                    <label for="notes">{{ 'CONTACTS.FORM.NOTES' | translate }}</label>
+
+                    <input class="form__field--input"
+                           type="text"
+                           id="notes"
+                           placeholder="{{ 'PLACEHOLDERS.NOTES_PLACEHOLDER' | translate }}"
+                           formControlName="notes"
+                           (contextmenu)="variablesService.onContextMenu($event)">
+                    <div class="error"
+                         *ngIf="addContactForm.controls['notes'].invalid">
+                        <div *ngIf="addContactForm.controls['notes'].errors['maxLength']">
+                            {{ 'CONTACTS.FORM_ERRORS.MAX_LENGTH' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="primary big w-100"
+                        [disabled]="!addContactForm.valid">{{ 'CONTACTS.BUTTON.ADD_EDIT' |translate }}</button>
+
+                <app-send-modal *ngIf="isModalDialogVisible"
+                                [form]="addContactForm"
+                                (confirmed)="confirmed()">
+                </app-send-modal>
+
+            </form>
+        </div>
+    </div>
+</div>

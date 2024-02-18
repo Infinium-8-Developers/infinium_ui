@@ -1,5 +1,4 @@
-button,
-.btn {
+button, .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -23,8 +22,7 @@ button,
   }
 
   // button size for (primary, outline)
-  &.primary,
-  &.outline {
+  &.primary, &.outline {
     &.small {
       min-height: 4.5rem;
     }
@@ -38,21 +36,17 @@ button,
     background-color: var(--azure-500);
 
     &:not(:disabled) {
-      &:focus,
-      &:hover,
-      &.active {
+      &:focus, &:hover, &.active {
         background-color: var(--azure-600);
       }
     }
   }
 
   &.outline {
-    border: 0.2rem solid var(--azure-500);
+    border: 0.15rem solid var(--azure-500);
 
     &:not(:disabled) {
-      &:hover,
-      &:focus,
-      &.active {
+      &:hover, &:focus, &.active {
         background-color: var(--gray-900);
       }
     }

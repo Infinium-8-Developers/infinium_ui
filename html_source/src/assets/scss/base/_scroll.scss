@@ -12,7 +12,7 @@
 ::-webkit-scrollbar-thumb {
   background-color: var(--silver-500);
   background-clip: padding-box;
-  border: 0.2rem solid transparent;
+  border: 0.25rem solid transparent;
   border-radius: 1rem;
 }
 
@@ -29,6 +29,9 @@ body {
 .scrolled-content {
   overflow-y: scroll;
   overflow-x: hidden;
+  //display: flex;
+  //flex-direction: column;
+  //flex: auto;
   height: auto;
   margin-right: -2rem;
 

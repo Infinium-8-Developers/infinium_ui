@@ -1,0 +1,90 @@
+<form class="mb-2" fxLayout="column" fxLayoutAlign="start stretch">
+    <app-checkbox class="mb-1"
+                  label="classWalletActive"
+                  [value]="classWalletActive"
+                  (emitChange)="classWalletActive = !classWalletActive"></app-checkbox>
+    <app-checkbox class="mb-1"
+                  label="classWalletAuditable"
+                  [value]="classWalletAuditable"
+                  (emitChange)="classWalletAuditable = !classWalletAuditable"></app-checkbox>
+    <app-checkbox class="mb-1"
+                  label="classWalletWatchOnly"
+                  [value]="classWalletWatchOnly"
+                  (emitChange)="classWalletWatchOnly = !classWalletWatchOnly"></app-checkbox>
+    <app-checkbox class="mb-1"
+                  label="showIndicator"
+                  [value]="showIndicator"
+                  (emitChange)="showIndicator = !showIndicator"></app-checkbox>
+    <app-checkbox class="mb-1"
+                  label="showPrice"
+                  [value]="showPrice"
+                  (emitChange)="showPrice = !showPrice"></app-checkbox>
+    <app-checkbox class="mb-1"
+                  label="percentRed"
+                  [value]="percentRed"
+                  (emitChange)="percentRed = !percentRed"></app-checkbox>
+    <app-checkbox class="mb-1"
+                  label="showStaking"
+                  [value]="showStaking"
+                  (emitChange)="showStaking = !showStaking"></app-checkbox>
+    <app-checkbox class="mb-1"
+                  label="showProgressBar"
+                  [value]="showProgressBar"
+                  (emitChange)="showProgressBar = !showProgressBar"></app-checkbox>
+</form>
+
+<div class="wallet"
+     cdkDrag
+     vsDragScroll
+     [class.active]="classWalletActive"
+     [class.auditable]="classWalletAuditable"
+     [class.watch-only]="classWalletWatchOnly">
+
+    <div class="header">
+        <div class="left">
+            <div class="name text-ellipsis">
+                            <span class="indicator"
+                                  *ngIf="showIndicator">
+                                12
+                            </span>
+
+                <span class="name">test</span>
+            </div>
+        </div>
+        <div class="right">
+            <button type="button">
+                <i class="icon close"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="balance">
+        <span class="text-ellipsis mr-1">9999</span>
+        <span>INF</span>
+    </div>
+
+    <ng-container *ngIf="showPrice">
+        <h4 class="price">
+            $999
+
+            <span class="percent"
+                  [class.red]="percentRed">20%</span>
+        </h4>
+    </ng-container>
+
+    <ng-container *ngIf="showStaking">
+        <div class="staking">
+            <span class="text">{{ 'SIDEBAR.ACCOUNT.STAKING' | translate }}</span>
+            <app-switch></app-switch>
+        </div>
+    </ng-container>
+
+    <div class="account-synchronization"
+         *ngIf="showProgressBar">
+        <div class="progress-bar">
+            <div class="fill"
+                 [style.width]="33 + '%'"></div>
+        </div>
+        <div class="progress-percent">33%</div>
+    </div>
+</div>

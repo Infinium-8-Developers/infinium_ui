@@ -1,14 +1,14 @@
 :root {
   // red
   --red-600: rgba(255, 103, 103, 0.75);
-  --red-500: #ff6767;
-  --red-100: #ffcbcb;
+  --red-500: #FF6767;
+  --red-100: #FFCBCB;
 
   // blue
-  --blue-900: #0c0c3a;
-  --blue-800: #0c1243;
-  --blue-700: #0f2055;
-  --blue-500: #11316b;
+  --blue-900: #0C0C3A;
+  --blue-800: #0C1243;
+  --blue-700: #0F2055;
+  --blue-500: #11316B;
   --blue-450: #144182;
   --blue-400: rgba(31, 143, 235, 0.3);
   --blue-300: rgba(31, 143, 235, 0.15);
@@ -22,14 +22,13 @@
   --gray-700: rgba(255, 255, 255, 0.3);
   --gray-600: rgba(255, 255, 255, 0.4);
   --gray-500: rgba(255, 255, 255, 0.5);
-  --gray-400: rgba(255, 255, 255, 0.75);
 
   // aqua
-  --aqua-500: #16d1d6;
+  --aqua-500: #16D1D6;
 
   // azure
-  --azure-600: #1c72b9;
-  --azure-500: #1f8feb;
+  --azure-600: #1C72B9;
+  --azure-500: #1F8FEB;
 
   // white
   --white-500: #ffffff;
@@ -41,35 +40,22 @@
   --amethyst-500: #9a69f7;
 
   // silver
-  --silver-500: #8898b5;
+  --silver-500: #8898B5;
 
   // borders
-  --border: 0.2rem solid var(--gray-800);
-  --border-not-empty: 0.2rem solid var(--gray-500);
-  --border-disabled: 0.2rem solid var(--gray-800);
-  --border-error: 0.2rem solid var(--red-600);
+  --border: 0.15rem solid var(--gray-800);
+  --border-not-empty: 0.15rem solid var(--gray-500);
+  --border-disabled: 0.15rem solid var(--gray-800);
+  --border-error: 0.15rem solid var(--red-600);
 
   // gradient
-  --gradietAquaToBlue: radial-gradient(
-    100% 188.88% at 0% 0%,
-    #16d1d6 0%,
-    #274cff 100%
-  );
+  --gradietAquaToBlue: radial-gradient(100% 188.88% at 0% 0%, #16d1d6 0%, #274cff 100%);
 
-  --gradietLightAmethystToPurpurle: radial-gradient(
-    100% 246.57% at 0% 0%,
-    rgba(163, 102, 255, 0.5) 0%,
-    rgba(96, 31, 255, 0.5) 100%
-  );
-  --gradietAmethystToPurpurle: radial-gradient(
-    100% 246.57% at 0% 0%,
-    #a366ff 0%,
-    #601fff 100%
-  );
+  --gradietLightAmethystToPurpurle: radial-gradient(100% 246.57% at 0% 0%, rgba(163, 102, 255, 0.5) 0%, rgba(96, 31, 255, 0.5) 100%);
+  --gradietAmethystToPurpurle: radial-gradient(100% 246.57% at 0% 0%, #A366FF 0%, #601FFF 100%);
 
   // shadow
-  --shadow-gray: 0px 2.11765px 5.64706px rgba(0, 0, 0, 0.15),
-    0px 2.11765px 0.705882px rgba(0, 0, 0, 0.06);
+  --shadow-gray: 0px 2.11765px 5.64706px rgba(0, 0, 0, 0.15), 0px 2.11765px 0.705882px rgba(0, 0, 0, 0.06);
   --shadow-black-300: 0 0 1rem var(--black-300);
 
   // chart

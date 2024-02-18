@@ -1,0 +1,199 @@
+<div class="page-container">
+
+    <div class="toolbar mb-2">
+        <div class="left">
+            <button type="button"
+                    class="btn-icon circle big mr-2"
+                    (click)="back()">
+                <i class="icon dropdown-arrow-left"></i>
+            </button>
+            <h1>{{ 'BREADCRUMBS.WALLET_DETAILS' | translate }}</h1>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="page-content">
+        <div class="breadcrumbs mb-2">
+            <div class="breadcrumb">
+                <a [routerLink]="['/wallet/history']">{{ variablesService.currentWallet.name }}</a>
+            </div>
+            <div class="breadcrumb">
+                <span>{{ 'BREADCRUMBS.WALLET_DETAILS' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="scrolled-content">
+            <div fxLayout="column"
+                 fxLayoutAlign="start stretch"
+                 fxFlexFill>
+                <form class="form"
+                      [formGroup]="detailsForm"
+                      (ngSubmit)="onSubmitEdit()">
+                    <div class="form__field">
+                        <label for="wallet-name">{{ 'WALLET_DETAILS.LABEL_NAME' | translate }}</label>
+                        <input class="form__field--input"
+                               type="text"
+                               id="wallet-name"
+                               [placeholder]="'PLACEHOLDERS.WALLET_NAME_PLACEHOLDER' | translate"
+                               formControlName="name"
+                               [maxLength]="variablesService.maxWalletNameLength"
+                               (contextmenu)="variablesService.onContextMenu($event)">
+                        <div class="error"
+                             *ngIf="detailsForm.controls['name'].invalid && (detailsForm.controls['name'].dirty || detailsForm.controls['name'].touched)">
+                            <div *ngIf="detailsForm.controls['name'].errors['same']">
+                                {{ 'WALLET_DETAILS.FORM_ERRORS.NAME_DUPLICATE' | translate }}
+                            </div>
+                            <div *ngIf="detailsForm.controls['name'].errors['duplicate']">
+                                {{ 'WALLET_DETAILS.FORM_ERRORS.NAME_DUPLICATE' | translate }}
+                            </div>
+                            <div *ngIf="detailsForm.get('name').value.length >= variablesService.maxWalletNameLength">
+                                {{ 'WALLET_DETAILS.FORM_ERRORS.MAX_LENGTH' | translate }}
+                            </div>
+                            <div *ngIf="detailsForm.controls['name'].hasError('required')">
+                                {{ 'WALLET_DETAILS.FORM_ERRORS.NAME_REQUIRED' | translate }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                            class="primary big max-w-19-rem w-100 mb-1"
+                            [disabled]="detailsForm.invalid && !detailsForm.controls['name'].dirty">
+                        {{'SETTINGS.MASTER_PASSWORD.BUTTON' | translate }}
+                    </button>
+                    <p *ngIf="ifSaved"
+                       class="saved-message"
+                       [class.active]="ifSaved">Saved!</p>
+
+                    <div class="form__field">
+                        <label for="wallet-location">{{ 'WALLET_DETAILS.LABEL_FILE_LOCATION' | translate }}</label>
+                        <input class="form__field--input cursor-default"
+                               type="text"
+                               id="wallet-location"
+                               formControlName="path"
+                               (contextmenu)="variablesService.onContextMenuOnlyCopy($event, detailsForm.get('path')?.value)"
+                               readonly>
+                    </div>
+                </form>
+
+				<ng-container
+					*ngIf="
+						!variablesService.currentWallet?.is_auditable &&
+						!variablesService.currentWallet?.is_watch_only
+					"
+				>
+					<ng-container *ngIf="!showSeed else seedPhraseContent">
+						<form class="form bg-light-blue-details p-2"
+							  fxLayout="column"
+							  fxLayoutAlign="start center"
+							  fxFlex="0 0 auto"
+							  [formGroup]="seedPhraseForm"
+							  (ngSubmit)="onSubmitSeed()">
+							<div class="form__field">
+								<label for="create-password">{{ 'WALLET_DETAILS.CREATE_PASSWORD_SECURE' | translate }}</label>
+								<input class="form__field--input"
+									   type="password"
+									   placeholder="{{ 'PLACEHOLDERS.PASSWORD_PLACEHOLDER' | translate }}"
+									   id="create-password"
+									   formControlName="password">
+							</div>
+
+							<div class="form__field">
+								<label for="confirm-password">{{ 'WALLET_DETAILS.FORM.CONFIRM_PASSWORD' | translate }}</label>
+								<input class="form__field--input"
+									   type="password"
+									   [class.invalid]="seedPhraseForm.invalid && seedPhraseForm.get('confirmPassword').value.length > 0"
+									   placeholder="{{'PLACEHOLDERS.PLACEHOLDER_CONFIRM' | translate}}"
+									   id="confirm-password"
+									   formControlName="confirmPassword">
+								<div class="error"
+									 *ngIf="seedPhraseForm.invalid && (seedPhraseForm.controls['confirmPassword'].dirty || seedPhraseForm.controls['confirmPassword'].touched)">
+									<div *ngIf="seedPhraseForm.invalid && seedPhraseForm.get('confirmPassword').value.length > 0">
+										{{ 'WALLET_DETAILS.FORM_ERRORS.PASSWORDS_DONT_MATCH' | translate }}
+									</div>
+								</div>
+							</div>
+
+							<button type="submit"
+									class="primary big w-100 mb-2"
+									[disabled]="!seedPhraseForm.valid"><i class="icon check-shield mr-1"></i>
+								{{ 'WALLET_DETAILS.FORM.GENERATE_SECURE_SEED' | translate }}</button>
+
+							<p class="color-primary"
+							   fxLayout="row"
+							   fxLayoutAlign="center center">
+								<i class="icon info-circle mr-1"></i>
+								{{ 'WALLET_DETAILS.FORM.SECURED_SEED_WILL_REQUIRE' | translate }}
+							</p>
+						</form>
+					</ng-container>
+
+					<ng-template #seedPhraseContent>
+						<div class="seed-phrase bg-light-blue-details p-2 border-radius-0_8-rem"
+							 fxLayout="column"
+							 fxFlex="0 0 auto">
+							<div class="header mb-2"
+								 fxLayout="row"
+								 fxFlex="0 0 auto"
+								 fxLayoutAlign="space-between center">
+								<div class="left">
+									<span>{{ 'WALLET_DETAILS.LABEL_SEED_PHRASE' | translate }}</span>
+								</div>
+								<div class="right">
+									<span class="status color-red"
+										  fxLayout="row"
+										  fxLayoutAlign="start center"
+										  *ngIf="seedPhraseForm.controls.password.value.length == 0">
+										{{ 'WALLET_DETAILS.SEED_IS_UNSECURED' | translate }}
+										<i class="icon unsecured ml-1"></i>
+									</span>
+									<span class="status color-aqua"
+										  fxLayout="row"
+										  fxLayoutAlign="start center"
+										  *ngIf="seedPhraseForm.controls.password.value.length > 0">
+										{{ 'WALLET_DETAILS.SEED_IS_SECURED' | translate }}
+										<i class="icon secured ml-1"></i>
+									</span>
+								</div>
+							</div>
+							<div class="content mb-1"
+								 fxLayout="row wrap"
+								 (contextmenu)="variablesService.onContextMenuOnlyCopy($event, seedPhrase)">
+								<ng-container *ngFor="let word of seedPhrase.split(' '); let index = index">
+									<div class="item p-1 mr-1 mb-1 border-radius-0_8-rem"
+										 fxLayout="row nowrap"
+										 fxLayoutAlign="start center">
+										<div class="number p-1 mr-1"
+											 fxLayout="row"
+											 fxLayoutAlign="center center">{{ index + 1 }}</div>
+										<span class="word"
+											  fxLayout="row">{{ word }}</span>
+									</div>
+								</ng-container>
+							</div>
+							<div class="footer max-w-50-rem w-100"
+								 fxLayout="column">
+								<button type="button"
+										class="outline big w-100 mb-2"
+										(click)="copySeedPhrase()">
+									<ng-container *ngIf="!seedPhraseCopied">
+										<i class="icon copy mr-1"></i>
+										{{ 'SEED_PHRASE.BUTTON_COPY' | translate }}
+									</ng-container>
+									<ng-container *ngIf="seedPhraseCopied">
+										<i class="icon check mr-1"></i>
+										{{ 'SEED_PHRASE.BUTTON_COPIED' | translate }}
+									</ng-container>
+								</button>
+								<p class="text-align-center"
+								   *ngIf="seedPhraseForm.controls.password.value.length > 0">
+									<i class="icon info-circle mr-1"></i>
+									<span class="color-primary">{{ 'WALLET_DETAILS.REMEMBER_YOU_WILL_REQUIRE' | translate}}</span>
+								</p>
+							</div>
+						</div>
+					</ng-template>
+				</ng-container>
+            </div>
+        </div>
+    </div>
+</div>

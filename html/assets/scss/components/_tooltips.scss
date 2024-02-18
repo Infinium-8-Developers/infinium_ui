@@ -15,7 +15,7 @@
     margin-top: -1rem;
 
     &:after {
-      content: '';
+      content: "";
       display: block;
       width: 1rem;
       height: 1rem;
@@ -31,7 +31,7 @@
     margin-top: 1rem;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -0.5rem;
       left: 3rem;
@@ -47,7 +47,7 @@
     margin-top: -1rem;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -0.5rem;
       left: 1.5rem;
@@ -63,7 +63,7 @@
     margin-top: -1rem;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -0.5rem;
       right: 0.7rem;
@@ -79,7 +79,7 @@
     margin-top: 1rem;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: -0.5rem;
       left: calc(50% - 0.5rem);
@@ -95,7 +95,7 @@
     margin-top: 1rem;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -0.5rem;
       left: 3rem;
@@ -112,7 +112,7 @@
     margin-top: 1rem;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: -0.5rem;
       right: 0.5rem;
@@ -128,7 +128,7 @@
     margin-left: -1rem;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       top: calc(50% - 0.5rem);
       right: -0.5rem;
@@ -144,7 +144,7 @@
     margin-left: 1rem;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: calc(50% - 0.5rem);
       left: -0.5rem;
@@ -187,7 +187,7 @@
     font-size: 1.3rem;
 
     .available {
-      margin-bottom: 0.7rem;
+      margin-bottom: 1.7rem;
 
       b {
         font-weight: 600;
@@ -206,13 +206,6 @@
       cursor: pointer;
       color: var(--azure-500);
     }
-  }
-
-  .balance-scroll-list {
-    display: flex;
-    flex-direction: column;
-    max-height: 20rem;
-    overflow-y: auto;
   }
 
   &.ng-tooltip-top {
@@ -247,7 +240,6 @@
   background-color: var(--blue-450);
   color: var(--white-500);
   .tooltip-inner {
-    overflow: auto;
     word-break: break-word;
     max-width: 50rem;
     max-height: 25rem;
@@ -341,7 +333,7 @@
     margin-left: -1.5rem;
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0.6rem;
       right: -1rem;
@@ -355,7 +347,7 @@
     margin-left: 1.5rem;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0.6rem;
       left: -1rem;
@@ -372,8 +364,7 @@
   color: var(--white-500);
   .tooltip-inner {
     .icon {
-      background: center / contain no-repeat
-        url(~src/assets/icons/red/update-alert.svg);
+      background: center / contain no-repeat url(~src/assets/icons/red/update-alert.svg);
     }
   }
 }

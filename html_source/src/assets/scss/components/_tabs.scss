@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
-  overflow: hidden;
 
   .tabs-header {
     display: flex;
@@ -20,18 +19,15 @@
       flex: 1 1 auto;
       transition: background-color 0.25s ease-in-out;
 
-      i,
-      span {
+      i, span {
         opacity: 0.75;
         transition: opacity 0.25s ease-in-out;
       }
 
-      &.active,
-      &:hover:not(.active):not(.disabled) {
+      &.active, &:hover:not(.active):not(.disabled) {
         background-color: var(--blue-700);
 
-        i,
-        span {
+        i, span {
           opacity: 1;
         }
       }

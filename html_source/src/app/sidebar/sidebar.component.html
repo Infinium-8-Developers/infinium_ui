@@ -1,0 +1,195 @@
+<div class="sidebar-header mb-2">
+	<div class="logo">
+		<img src="assets/icons/blue/infinium-logo.svg"
+			 alt="infinium-logo">
+	</div>
+</div>
+
+<div class="sidebar-content">
+	<div class="sidebar-content-list scrolled-content mb-1"
+		 cdkDropList
+		 cdkDropListLockAxis="y"
+		 #scrollContainer
+		 (cdkDropListDropped)="drop($event)">
+		<ng-container *ngFor="let wallet of variablesService.wallets">
+			<div class="wallet"
+				 cdkDrag
+				 vsDragScroll
+				 [class.active]="wallet?.wallet_id === variablesService?.currentWallet?.wallet_id"
+				 [class.auditable]="wallet.is_auditable && !wallet.is_watch_only"
+				 [class.watch-only]="wallet.is_watch_only"
+				 [vsDragScrollContainer]="scrollContainer"
+				 [cdkDragData]="wallet"
+				 (click)="selectWallet(wallet.wallet_id)">
+				<div class="content">
+					<div class="header">
+						<div class="left">
+							<div class="name text-ellipsis">
+                            <span class="indicator"
+								  *ngIf="wallet.new_contracts">
+                                {{ wallet.new_contracts }}
+                            </span>
+
+								<span class="name"
+									  tooltip="{{ wallet.name }}"
+									  placement="top-left"
+									  tooltipClass="table-tooltip account-tooltip"
+									  [delay]="500"
+									  [showWhenNoOverflow]="false">
+                              {{!wallet.alias['name'] ? wallet.name : wallet.alias['name']}}
+                          </span>
+							</div>
+						</div>
+						<div class="right">
+							<button type="button"
+									tooltip="{{ 'WALLET.TOOLTIPS.CLOSE' | translate }}"
+									placement="top"
+									tooltipClass="table-tooltip account-tooltip"
+									[delay]="500"
+									[timeDelay]="500"
+									(click)="showDialog(wallet.wallet_id)">
+								<i class="icon close"></i>
+							</button>
+						</div>
+					</div>
+
+					<div class="balance">
+						<span class="text-ellipsis mr-1">{{wallet.balance | intToMoney : '3' }}</span>
+						<span>{{variablesService.defaultCurrency}}</span>
+					</div>
+
+					<h4 class="price"
+						*appDisablePriceFetch>
+						${{wallet.getMoneyEquivalent(variablesService.moneyEquivalent) | intToMoney | number :'1.2-2'}}
+
+						<span class="percent"
+							  [class.red]="variablesService.moneyEquivalentPercent < 0">
+                            {{ variablesService.moneyEquivalentPercent | number : '1.1-2' }}%
+                    </span>
+					</h4>
+
+					<ng-container
+						*ngIf="(!wallet.is_auditable && !wallet.is_watch_only) || (wallet.is_auditable && !wallet.is_watch_only)">
+						<div class="staking"
+							 *ngIf="!(!wallet.loaded && variablesService.daemon_state === 2)">
+							<span class="text">{{ 'SIDEBAR.ACCOUNT.STAKING' | translate }}</span>
+							<app-staking-switch [wallet_id]="wallet.wallet_id"
+												[(staking)]="wallet.staking"></app-staking-switch>
+						</div>
+					</ng-container>
+
+					<div class="account-synchronization"
+						 *ngIf="!wallet.loaded && variablesService.daemon_state === 2">
+						<div class="progress-bar">
+							<div class="fill"
+								 [style.width]="wallet.progress + '%'"></div>
+						</div>
+						<div class="progress-percent">{{ wallet.progress }}%</div>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+	</div>
+
+	<div class="sidebar-nav scrolled-content">
+		<!-- ui-kit -->
+		<ng-container *ngIf="false">
+			<button class="outline small w-100 mb-1 px-2"
+					fxLayout="row inline wrap"
+					fxLayoutAlign="start center"
+					routerLinkActive="active"
+					[routerLink]="['/ui-kit']">
+				<span>ui-kit</span>
+			</button>
+		</ng-container>
+
+		<!-- add wallet -->
+		<button class="outline small w-100 mb-1 px-2"
+				fxLayout="row inline wrap"
+				fxLayoutAlign="start center"
+				(click)="goMainPage()">
+			<i class="icon plus mr-1"></i>
+			<span>{{ 'SIDEBAR.ADD_NEW' | translate }}</span>
+		</button>
+
+		<!-- contact -->
+		<!-- TODO: Uncomment if needed page contact. If you want deleted, please ask Ravaga -->
+
+		<!--        <ng-container *ngIf="variablesService.appPass === ''; else contactsShow">-->
+		<!--            <button class="outline small w-100 mb-1 px-2"-->
+		<!--                    fxLayout="row inline wrap"-->
+		<!--                    fxLayoutAlign="start center"-->
+		<!--                    routerLinkActive="active"-->
+		<!--                    tooltip="{{ 'SIDEBAR.CONTACTS_TOOLTIP' | translate }}"-->
+		<!--                    placement="top"-->
+		<!--                    tooltipClass="table-tooltip account-tooltip"-->
+		<!--                    [delay]="500"-->
+		<!--                    [timeDelay]="500"-->
+		<!--                    [disabled]="variablesService.daemon_state !== 2 || variablesService.appPass === ''"-->
+		<!--                    (click)="contactsRoute()">-->
+		<!--                <i class="icon contacts mr-1"></i>-->
+		<!--                <span>{{ 'SIDEBAR.CONTACTS' | translate }}</span>-->
+		<!--            </button>-->
+		<!--        </ng-container>-->
+
+		<!--        <ng-template #contactsShow>-->
+		<!--            <button class="outline small w-100 mb-1 px-2"-->
+		<!--                    fxLayout="row inline wrap"-->
+		<!--                    fxLayoutAlign="start center"-->
+		<!--                    routerLinkActive="active"-->
+		<!--                    (click)="contactsRoute()"-->
+		<!--                    [disabled]="variablesService.daemon_state !== 2">-->
+		<!--                <i class="icon contacts mr-1"></i>-->
+		<!--                <span>{{ 'SIDEBAR.CONTACTS' | translate }}</span>-->
+		<!--            </button>-->
+		<!--        </ng-template>-->
+
+		<!-- settings -->
+		<button class="outline small w-100 mb-1 px-2"
+				fxLayout="row inline wrap"
+				fxLayoutAlign="start center"
+				routerLinkActive="active"
+				[routerLink]="['/settings']">
+			<i class="icon settings mr-1"></i>
+			<span> {{ 'SIDEBAR.SETTINGS' | translate }}</span>
+		</button>
+
+		<!-- Log out -->
+		<ng-container *ngIf="variablesService.appPass === ''; else masterPass">
+			<button class="outline small w-100 px-2"
+					fxLayout="row inline wrap"
+					fxLayoutAlign="start center"
+					tooltip="{{ 'SIDEBAR.LOG_OUT_TOOLTIP' | translate }}"
+					placement="bottom"
+					tooltipClass="table-tooltip account-tooltip"
+					[delay]="500"
+					[timeDelay]="500"
+					[disabled]="variablesService.appPass === ''"
+					(click)="logOut()">
+				<i class="icon logout mr-1"></i>
+				<span> {{ 'SIDEBAR.LOG_OUT' | translate }}</span>
+			</button>
+		</ng-container>
+
+		<ng-template #masterPass>
+			<button class="outline small w-100 px-2"
+					fxLayout="row inline wrap"
+					fxLayoutAlign="start center"
+					(click)="logOut()">
+				<i class="icon logout mr-1"></i>
+				<span> {{ 'SIDEBAR.LOG_OUT' | translate }}</span>
+			</button>
+		</ng-template>
+	</div>
+</div>
+
+<div class="sidebar-footer">
+	<app-synchronization-status></app-synchronization-status>
+</div>
+
+<app-confirm-modal *ngIf="isModalDialogVisible"
+				   [title]=" 'WALLET.CONFIRM.TITLE' | translate "
+				   [message]=" 'WALLET.CONFIRM.MESSAGE' | translate "
+				   (confirmed)="confirmed($event)"></app-confirm-modal>
+
+<app-deeplink></app-deeplink>

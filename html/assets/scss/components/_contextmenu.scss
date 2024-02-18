@@ -1,5 +1,5 @@
 .ngx-contextmenu {
-  &--dropdown-menu {
+  .dropdown-menu {
     border: none;
     padding: 0;
     background-color: var(--chartOptionsBackgroundColor);
@@ -13,12 +13,10 @@
     text-align: center;
   }
 
-  button {
+  a {
     display: block;
     padding: 0.5em 1em;
     color: var(--white-500);
-    border-radius: 0;
-    width: 100%;
 
     &:hover {
       background-color: var(--chartOptionsHoverColor);

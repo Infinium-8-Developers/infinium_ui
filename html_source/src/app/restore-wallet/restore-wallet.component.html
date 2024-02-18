@@ -1,0 +1,147 @@
+<div class="page-container">
+
+    <div class="toolbar mb-2">
+        <div class="left">
+            <button type="button"
+                    class="btn-icon circle big mr-2"
+                    (click)="back()">
+                <i class="icon dropdown-arrow-left"></i>
+            </button>
+            <h1>{{ 'BREADCRUMBS.ADD_WALLET' | translate }}</h1>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="page-content">
+        <div class="breadcrumbs mb-2">
+            <div class="breadcrumb">
+                <a [routerLink]="['/add-wallet']">{{'BREADCRUMBS.ADD_WALLET' | translate }}</a>
+            </div>
+            <div class="breadcrumb">
+                <span>{{'BREADCRUMBS.RESTORE_WALLET' | translate}}</span>
+            </div>
+        </div>
+
+        <div class="scrolled-content">
+            <form class="form"
+                  [formGroup]="restoreForm">
+
+                <div class="form__field">
+                    <label for="wallet-name">{{ 'RESTORE_WALLET.LABEL_NAME' | translate }}</label>
+                    <input class="form__field--input"
+                           type="text"
+                           id="wallet-name"
+                           formControlName="name"
+                           [placeholder]="'PLACEHOLDERS.WALLET_NAME_PLACEHOLDER' | translate"
+                           [attr.readonly]="walletSaved ? '' : null"
+                           [maxLength]="variablesService.maxWalletNameLength"
+                           (contextmenu)="variablesService.onContextMenu($event)">
+                    <div class="error"
+                         *ngIf="restoreForm.controls['name'].invalid && (restoreForm.controls['name'].dirty || restoreForm.controls['name'].touched)">
+                        <div *ngIf="restoreForm.controls['name'].errors['duplicate']">
+                            {{ 'RESTORE_WALLET.FORM_ERRORS.NAME_DUPLICATE' | translate }}
+                        </div>
+                        <div *ngIf="restoreForm.get('name').value.length >= variablesService.maxWalletNameLength">
+                            {{ 'RESTORE_WALLET.FORM_ERRORS.MAX_LENGTH' | translate }}
+                        </div>
+                        <div *ngIf="restoreForm.get('name').value.length >= variablesService.maxWalletNameLength">
+                            {{ 'RESTORE_WALLET.FORM_ERRORS.MAX_LENGTH' | translate }}
+                        </div>
+                        <div *ngIf="restoreForm.controls['name'].errors['required']">
+                            {{ 'RESTORE_WALLET.FORM_ERRORS.NAME_REQUIRED' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form__field">
+                    <label for="wallet-password">{{ 'RESTORE_WALLET.PASS' | translate }}</label>
+                    <input class="form__field--input"
+                           type="password"
+                           id="wallet-password"
+                           placeholder="{{ 'PLACEHOLDERS.WALET_PASSWORD_PLACEHOLDER' | translate }}"
+                           formControlName="password"
+                           [attr.readonly]="walletSaved ? '' : null"
+                           (contextmenu)="variablesService.onContextMenuPasteSelect($event)">
+                    <div class="error"
+                         *ngIf="restoreForm.controls['password'].dirty && restoreForm.controls['password'].errors">
+                        <div *ngIf="restoreForm.controls['password'].errors.pattern">
+                            {{ 'ERRORS.WRONG_PASSWORD' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form__field">
+                    <label for="confirm-wallet-password">{{ 'RESTORE_WALLET.CONFIRM' | translate }}</label>
+                    <input class="form__field--input"
+                           type="password"
+                           id="confirm-wallet-password"
+                           placeholder="{{ 'PLACEHOLDERS.CONFIRM_WALET_PASSWORD_PLACEHOLDER' | translate }}"
+                           formControlName="confirm"
+                           [class.invalid]="restoreForm.controls['password'].dirty && restoreForm.controls['confirm'].dirty && restoreForm.errors && restoreForm.get('confirm').value.length > 0"
+                           [attr.readonly]="walletSaved ? '' : null"
+                           (contextmenu)="variablesService.onContextMenuPasteSelect($event)">
+                    <div class="error"
+                         *ngIf="restoreForm.controls['password'].dirty && restoreForm.controls['confirm'].dirty && restoreForm.errors && restoreForm.get('confirm').value.length > 0">
+                        <div *ngIf="restoreForm.errors['confirm_mismatch']">
+                            {{ 'RESTORE_WALLET.FORM_ERRORS.CONFIRM_NOT_MATCH' | translate }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form__field">
+                    <label for="phrase-key">{{ 'RESTORE_WALLET.LABEL_PHRASE_KEY' | translate }}</label>
+                    <input class="form__field--input"
+                           type="text"
+                           id="phrase-key"
+                           formControlName="key"
+                           [placeholder]="'PLACEHOLDERS.SEED_PHRASE_PLACEHOLDER' | translate"
+                           [attr.readonly]="walletSaved ? '' : null"
+                           (contextmenu)="variablesService.onContextMenu($event)">
+                    <div class="error"
+                         *ngIf="restoreForm.controls['key'].invalid && (restoreForm.controls['key'].dirty || restoreForm.controls['key'].touched)">
+                        <div *ngIf="restoreForm.controls['key'].errors['required']">
+                            {{ 'RESTORE_WALLET.FORM_ERRORS.KEY_REQUIRED' | translate }}
+                        </div>
+                    </div>
+					<div class="error" *ngIf="(restoreForm.controls['key'].dirty || restoreForm.controls['key'].touched) && !this.seedPhraseInfo?.syntax_correct">
+						{{ 'Seed phrase not valid' | translate }}
+					</div>
+                </div>
+                <div class="form__field"
+                     *ngIf="this.seedPhraseInfo?.syntax_correct && this.seedPhraseInfo?.require_password">
+                    <label for="seed-password">{{ 'RESTORE_WALLET.SEED_PASSWORD' | translate }}</label>
+                    <input class="form__field--input"
+                           type="password"
+                           id="seed-password"
+                           placeholder="{{ 'PLACEHOLDERS.SEED_PHRASE_PLACEHOLDER' | translate }}"
+                           formControlName="seedPassword">
+                    <div class="error"
+                         *ngIf="(restoreForm.controls['seedPassword'].dirty || restoreForm.controls['seedPassword'].touched) && !this.seedPhraseInfo?.hash_sum_matched">
+                        <span>{{ 'RESTORE_WALLET.FORM_ERRORS.INCORRECT_PASSWORD' | translate }}</span>
+                    </div>
+                    <div class="success"
+                         *ngIf="this.seedPhraseInfo?.hash_sum_matched">
+                        <span>{{ 'RESTORE_WALLET.OK' | translate }}</span>
+                    </div>
+                </div>
+
+
+                <button type="button"
+                        class="outline big w-100 mb-2"
+                        *ngIf="walletSaved"
+                        disabled>
+                    <i class="icon"></i>
+                    {{walletSavedName}}
+                </button>
+                <button type="button"
+                        class="outline big w-100 mb-2"
+                        (click)="saveWallet()"
+                        [disabled]="(!this.seedPhraseInfo?.syntax_correct || !this.seedPhraseInfo?.require_password || !this.seedPhraseInfo?.hash_sum_matched) && (!this.seedPhraseInfo?.syntax_correct || this.seedPhraseInfo?.require_password)"
+                        *ngIf="!walletSaved">{{ 'RESTORE_WALLET.BUTTON_SELECT' | translate }}</button>
+                <button type="button"
+                        class="primary big w-100 mb-2"
+                        (click)="createWallet()"
+                        [disabled]="!walletSaved">{{'RESTORE_WALLET.BUTTON_CREATE' | translate }}</button>
+            </form>
+        </div>
+    </div>
+</div>

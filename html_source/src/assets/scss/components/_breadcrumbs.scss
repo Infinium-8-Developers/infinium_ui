@@ -28,8 +28,7 @@
       cursor: pointer;
     }
 
-    &:last-child,
-    &:hover {
+    &:last-child, &:hover {
       > span,
       a {
         opacity: 1;
@@ -49,8 +48,7 @@
         transform: translateY(-50%);
         width: 1.8rem;
         height: 1.8rem;
-        background: center / contain no-repeat
-          url(~src/assets/icons/white/dropdown-arrow-right.svg);
+        background: center / contain no-repeat url(~src/assets/icons/white/dropdown-arrow-right.svg);
       }
     }
   }

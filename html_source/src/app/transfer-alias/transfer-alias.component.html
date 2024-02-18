@@ -1,0 +1,92 @@
+<div class="page-container">
+
+    <div class="toolbar mb-2">
+        <div class="left">
+            <button type="button"
+                    class="btn-icon circle big mr-2"
+                    (click)="back()">
+                <i class="icon dropdown-arrow-left"></i>
+            </button>
+            <h1>{{ 'BREADCRUMBS.TRANSFER_ALIAS' | translate }}</h1>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <div class="page-content">
+        <div class="breadcrumbs mb-2">
+            <div class="breadcrumb">
+                <a [routerLink]="['/wallet/history']">{{ wallet.name }}</a>
+            </div>
+            <div class="breadcrumb">
+                <span>{{ 'BREADCRUMBS.TRANSFER_ALIAS' | translate }}</span>
+            </div>
+        </div>
+
+        <div class="scrolled-content">
+            <form class="form">
+
+                <div class="form__field">
+                    <label for="alias-name">
+                        {{ 'TRANSFER_ALIAS.NAME.LABEL' | translate }}
+                    </label>
+                    <input class="form__field--input"
+                           type="text"
+                           name="alias-name"
+                           id="alias-name"
+                           [value]="alias.name"
+                           placeholder="{{ 'EDIT_ALIAS.NAME.PLACEHOLDER' | translate }}"
+                           readonly>
+                </div>
+
+                <div class="form__field textarea">
+                    <label for="alias-comment">
+                        {{ 'TRANSFER_ALIAS.COMMENT.LABEL' | translate }}
+                    </label>
+                    <textarea id="alias-comment"
+                              name="alias-comment"
+                              [(ngModel)]="alias.comment"
+                              placeholder="{{ 'EDIT_ALIAS.COMMENT.PLACEHOLDER' | translate }}"></textarea>
+                </div>
+
+                <div class="form__field">
+                    <label for="alias-transfer">
+                        {{ 'TRANSFER_ALIAS.ADDRESS.LABEL' | translate }}
+                    </label>
+                    <input class="form__field--input"
+                           type="text"
+                           name="alias-transfer"
+                           id="alias-transfer"
+                           [class.invalid]="transferAddress.length > 0 && (transferAddressAlias || !transferAddressValid || (transferAddressValid && !permissionSend) || notEnoughMoney)"
+                           [(ngModel)]="transferAddress"
+                           [ngModelOptions]="{standalone: true}"
+                           (ngModelChange)="changeAddress()"
+                           placeholder="{{ 'TRANSFER_ALIAS.ADDRESS.PLACEHOLDER' | translate }}"
+                           (contextmenu)="variablesService.onContextMenu($event)">
+                    <div class="error"
+                         *ngIf="transferAddress.length > 0 && (transferAddressAlias || !transferAddressValid || (transferAddressValid && !permissionSend) || notEnoughMoney)">
+                        <div *ngIf="!transferAddressValid">
+                            {{ 'TRANSFER_ALIAS.FORM_ERRORS.WRONG_ADDRESS' | translate }}
+                        </div>
+                        <div *ngIf="transferAddressAlias || (transferAddressValid && !permissionSend)">
+                            {{ 'TRANSFER_ALIAS.FORM_ERRORS.ALIAS_EXISTS' | translate }}
+                        </div>
+                        <div *ngIf="notEnoughMoney">
+                            {{ 'TRANSFER_ALIAS.FORM_ERRORS.NO_MONEY' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alias-cost mb-2">{{ "TRANSFER_ALIAS.COST" | translate : {
+                    value: variablesService.default_fee, currency:
+                    variablesService.defaultCurrency
+                } }}</div>
+
+                <button type="button"
+                        class="primary big w-100"
+                        (click)="transferAlias()"
+                        [disabled]="transferAddressAlias || !transferAddressValid || notEnoughMoney">
+                    {{ 'TRANSFER_ALIAS.BUTTON_TRANSFER' | translate }}</button>
+            </form>
+        </div>
+    </div>
+</div>

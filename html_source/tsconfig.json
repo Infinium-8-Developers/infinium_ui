@@ -2,20 +2,27 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "importHelpers": true,
     "paths": {
-      "@store/*": ["src/app/store/*"],
-      "@parts/*": ["src/app/parts/*"],
-      "@api/*": ["src/app/api/*"]
+      "store": [
+        "src/store.ts"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2020",
+    "module": "es2015",
     "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2018",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"],
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "resolveJsonModule": true,
     "esModuleInterop": true
   }

@@ -1,0 +1,193 @@
+<div class="modal p-2 border-radius-0_8-rem bg-light-blue max-h-100"
+     fxFlex="0 1 54rem"
+     fxLayout="column">
+    <ng-container *ngIf="walletsToPay.length > 1 && !secondStep">
+        <div class="content mb-2"
+             fxFlex="0 0 auto"
+             fxLayout="column">
+            <div class="form__field"
+                 fxFlex="0 0 auto">
+                <label>Select wallet for action:</label>
+                <ng-select [items]="walletsToPay"
+                           bindValue="wallet_id"
+                           bindLabel="name"
+                           [(ngModel)]="walletToPayId"
+                           [clearable]="false"
+                           [searchable]="false">
+                    <ng-template ng-label-tmp
+                                 let-item="item">
+                        {{item.name}}
+                    </ng-template>
+                    <ng-template ng-option-tmp
+                                 let-item="item"
+                                 let-index="index">
+                        {{item.name}}
+                    </ng-template>
+                </ng-select>
+            </div>
+        </div>
+
+        <div class="controls"
+             fxLayoutGap="1rem"
+             fxFlex="0 0 auto"
+             fxLayout="row nowrap"
+             fxLayoutAlign="space-between center">
+            <button type="button"
+                    class="outline big w-100"
+                    (click)="canselAction()">{{ 'EXPORT_HISTORY.CANCEL' | translate }}</button>
+            <button type="submit"
+                    class="primary big w-100"
+                    (click)="nextStep()">Next...
+            </button>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="secondStep && marketplaceModalShow && actionData.action === 'marketplace_offer_create'">
+        <h4 class="mb-2"
+            fxFlex="0 0 auto">
+            Creating a marketplace offer
+        </h4>
+        <div class="content scrolled-content mb-2"
+             fxFlex="1 1 auto"
+             fxLayout="column">
+            <div class="table-info"
+                 fxFlex="0 0 auto">
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Offer title' | translate }}</div>
+                    <div class="text">{{ actionData.title }}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Description' | translate }}</div>
+                    <div class="text">{{ actionData.description }}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Category' | translate }}</div>
+                    <div class="text">{{ actionData.category }}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Price' | translate }}</div>
+                    <div class="text">{{actionData.price}} {{this.variablesService.defaultCurrency}}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Preview url' | translate }}</div>
+                    <div class="text">{{actionData.url || actionData.img_url}}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Contacts' | translate }}</div>
+                    <div class="text">{{actionData.contact}}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Comments' | translate }}</div>
+                    <div class="text">{{actionData.comment || actionData.comments}}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Mixins' | translate }}</div>
+                    <div class="text">{{actionData.mixins || defaultMixin}}</div>
+                </div>
+
+                <hr class="separator"/>
+
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Transaction fee' | translate }}</div>
+                    <div class="text">
+                        {{actionData.price * (actionData.fee || this.variablesService.default_fee)}}
+                        {{this.variablesService.defaultCurrency}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls"
+             fxFlex="0 0 auto"
+             fxLayout="row nowrap"
+             fxLayoutAlign="space-between center"
+             fxLayoutGap="1rem">
+            <button type="button"
+                    class="outline big w-100"
+                    (click)="canselAction()">{{ 'EXPORT_HISTORY.CANCEL' | translate }}</button>
+            <button type="submit"
+                    class="primary big w-100"
+                    (click)="marketplaceSend()">Sign & Send...
+            </button>
+        </div>
+
+    </ng-container>
+
+    <ng-container *ngIf="marketplaceConfirmHash">
+        <h4 class="mb-2"
+            fxFlex="0 0 auto">
+            Operation successful
+        </h4>
+
+        <div class="content scrolled-content mb-2"
+             fxLayout="column"
+             fxFlex="1 1 auto">
+            <div class="table-info"
+                 fxFlex="0 0 auto">
+                <div class="row">
+                    <div class="label max-w-19-rem w-100">{{ 'Operation hash' | translate }}</div>
+                    <div class="text"
+                         fxLayout="row"
+                         fxLayoutAlign="start center"
+                         (contextmenu)="variablesService.onContextMenuOnlyCopy($event, marketplaceConfirmHash)">
+                        {{marketplaceConfirmHash}}
+                        <i class="icon ml-1"
+                           [class.copy]="!copyAnimation"
+                           [class.check]="copyAnimation"
+                           (click)="copyHash()"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls"
+             fxFlex="0 0 auto"
+             fxLayout="row"
+             fxLayoutAlign="space-between center">
+            <button type="button"
+                    class="primary big w-100"
+                    (click)="canselAction()">
+                Close
+            </button>
+        </div>
+    </ng-container>
+
+	<ng-container *ngIf="!walletsToPay.length">
+		<h4 class="mb-2"
+			fxFlex="0 0 auto">
+			Your wallets have not loaded yet. Try this action a little later.
+		</h4>
+
+		<div class="controls"
+			 fxFlex="0 0 auto"
+			 fxLayout="row"
+			 fxLayoutAlign="space-between center">
+			<button type="button"
+					class="primary big w-100"
+					(click)="canselAction()">
+				Ok
+			</button>
+		</div>
+	</ng-container>
+</div>

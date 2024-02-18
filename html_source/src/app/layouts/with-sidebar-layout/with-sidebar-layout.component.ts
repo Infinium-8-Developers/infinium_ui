@@ -1,24 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-with-sidebar-layout',
-  template: `
-    <app-sidebar></app-sidebar>
-
-    <div class="overflow-auto p-2" fxFlex="100">
-      <router-outlet></router-outlet>
-    </div>
-  `,
-  styles: [
-    `
-      :host {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-
-        display: flex;
-      }
-    `,
-  ],
+  templateUrl: './with-sidebar-layout.component.html',
+  styleUrls: ['./with-sidebar-layout.component.scss']
 })
-export class WithSidebarLayoutComponent {}
+export class WithSidebarLayoutComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

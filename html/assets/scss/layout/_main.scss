@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
   position: fixed;
   overflow: hidden;
   overscroll-behavior: none;
@@ -11,6 +10,7 @@ body {
   height: 100vh;
   min-height: 700px;
 }
+
 
 body {
   background: var(--blue-900);
@@ -38,8 +38,7 @@ app-root {
     min-height: 40px;
     flex: 0 0 auto;
 
-    .left,
-    .right {
+    .left, .right {
       display: flex;
       align-items: center;
     }

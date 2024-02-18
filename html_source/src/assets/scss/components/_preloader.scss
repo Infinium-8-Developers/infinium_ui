@@ -11,26 +11,27 @@
     animation: move 5s linear infinite;
     background-color: var(--azure-500);
     background-image: -webkit-gradient(
-        linear,
-        0 0,
-        100% 100%,
-        color-stop(0.125, rgba(0, 0, 0, 0.15)),
-        color-stop(0.125, transparent),
-        color-stop(0.25, transparent),
-        color-stop(0.25, rgba(0, 0, 0, 0.1)),
-        color-stop(0.375, rgba(0, 0, 0, 0.1)),
-        color-stop(0.375, transparent),
-        color-stop(0.5, transparent),
-        color-stop(0.5, rgba(0, 0, 0, 0.15)),
-        color-stop(0.625, rgba(0, 0, 0, 0.15)),
-        color-stop(0.625, transparent),
-        color-stop(0.75, transparent),
-        color-stop(0.75, rgba(0, 0, 0, 0.1)),
-        color-stop(0.875, rgba(0, 0, 0, 0.1)),
-        color-stop(0.875, transparent),
-        to(transparent)
-      ),
-      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.125, rgba(0, 0, 0, 0.3)), color-stop(0.125, transparent), color-stop(0.25, transparent), color-stop(0.25, rgba(0, 0, 0, 0.25)), color-stop(0.375, rgba(0, 0, 0, 0.25)), color-stop(0.375, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(0, 0, 0, 0.3)), color-stop(0.625, rgba(0, 0, 0, 0.3)), color-stop(0.625, transparent), color-stop(0.75, transparent), color-stop(0.75, rgba(0, 0, 0, 0.25)), color-stop(0.875, rgba(0, 0, 0, 0.25)), color-stop(0.875, transparent), to(transparent));
+                    linear, 0 0, 100% 100%,
+                    color-stop(.125, rgba(0, 0, 0, .15)), color-stop(.125, transparent),
+                    color-stop(.250, transparent), color-stop(.250, rgba(0, 0, 0, .10)),
+                    color-stop(.375, rgba(0, 0, 0, .10)), color-stop(.375, transparent),
+                    color-stop(.500, transparent), color-stop(.500, rgba(0, 0, 0, .15)),
+                    color-stop(.625, rgba(0, 0, 0, .15)), color-stop(.625, transparent),
+                    color-stop(.750, transparent), color-stop(.750, rgba(0, 0, 0, .10)),
+                    color-stop(.875, rgba(0, 0, 0, .10)), color-stop(.875, transparent),
+                    to(transparent)
+    ),
+    -webkit-gradient(
+                    linear, 0 100%, 100% 0,
+                    color-stop(.125, rgba(0, 0, 0, .30)), color-stop(.125, transparent),
+                    color-stop(.250, transparent), color-stop(.250, rgba(0, 0, 0, .25)),
+                    color-stop(.375, rgba(0, 0, 0, .25)), color-stop(.375, transparent),
+                    color-stop(.500, transparent), color-stop(.500, rgba(0, 0, 0, .30)),
+                    color-stop(.625, rgba(0, 0, 0, .30)), color-stop(.625, transparent),
+                    color-stop(.750, transparent), color-stop(.750, rgba(0, 0, 0, .25)),
+                    color-stop(.875, rgba(0, 0, 0, .25)), color-stop(.875, transparent),
+                    to(transparent)
+    );
     background-size: 10rem 10rem;
     width: 100%;
     height: 1rem;
@@ -45,3 +46,10 @@
     background-position: 100% 10rem;
   }
 }
+
+
+
+
+
+
+

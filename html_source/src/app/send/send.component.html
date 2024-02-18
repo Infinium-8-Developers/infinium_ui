@@ -1,0 +1,201 @@
+<div class="container scrolled-content"
+     fxFlex="1 1 auto">
+    <form *ngIf="!isLoading"
+          class="form"
+          fxFlex="0 1 50rem"
+          fxLayout="column"
+          fxLayoutAlign="start stretch"
+          [formGroup]="sendForm"
+          (ngSubmit)="showDialog()">
+
+        <div class="form__field--row">
+            <div class="form__field form__field-dropdown">
+                <label for="send-address">{{ 'SEND.ADDRESS' | translate }}</label>
+                <input type="text"
+                       class="form__field--input"
+                       id="send-address"
+                       formControlName="address"
+                       [placeholder]="'PLACEHOLDERS.ADRESS_PLACEHOLDER' | translate"
+                       (mousedown)="addressMouseDown($event)"
+                       (contextmenu)="variablesService.onContextMenu($event)"
+                       (input)="addressToLowerCase()">
+
+                <div
+                      class="dropdown py-0_5 border-radius-0_8-rem bg-light-blue-details"
+                      *ngIf="isOpen && !!localAliases.length">
+                    <div class="item"
+                         *ngFor="let item of localAliases"
+                         (click)="setAlias(item.name)">
+						<div class="alias" [class.pl-1]="item.name.length > 6" [class.available]="item.name.length >= 2 && item.name.length <= 6">
+							<div class="text-ellipsis">{{item.name}}</div>
+						</div>
+					</div>
+                </div>
+
+                <div class="error"
+                     *ngIf="sendForm.controls['address'].invalid && (sendForm.controls['address'].dirty || sendForm.controls['address'].touched)">
+                    <div *ngIf="sendForm.controls['address'].errors['address_not_valid']">
+                        {{ 'SEND.FORM_ERRORS.ADDRESS_NOT_VALID' | translate }}
+                    </div>
+                    <div *ngIf="sendForm.controls['address'].errors['alias_not_valid']">
+                        {{ 'SEND.FORM_ERRORS.ALIAS_NOT_VALID' | translate }}
+                    </div>
+					<div *ngIf="sendForm.controls['address'].errors['alias_not_found']">
+						{{ 'SEND.FORM_ERRORS.ALIAS_NOT_FOUND' | translate }}
+					</div>
+                    <div *ngIf="sendForm.controls['address'].hasError('required')">
+                        {{ 'SEND.FORM_ERRORS.ADDRESS_REQUIRED' | translate }}
+                    </div>
+                </div>
+                <div *ngIf="currentAliasAddress"
+                     class="info text-ellipsis">
+                    <span>{{getShorterAdress()}}</span>
+                </div>
+            </div>
+
+            <div class="form__field">
+                <label for="send-amount">{{ 'SEND.AMOUNT' | translate }}</label>
+                <input type="text"
+                       class="form__field--input"
+                       id="send-amount"
+                       formControlName="amount"
+                       [placeholder]="'PLACEHOLDERS.AMOUNT_PLACEHOLDER' | translate"
+                       appInputValidate="money"
+                       (contextmenu)="variablesService.onContextMenu($event)">
+                <div class="error"
+                     *ngIf="sendForm.controls['amount'].invalid && (sendForm.controls['amount'].dirty || sendForm.controls['amount'].touched)">
+                    <div *ngIf="sendForm.controls['amount'].errors['zero']">
+                        {{ 'SEND.FORM_ERRORS.AMOUNT_ZERO' | translate }}
+                    </div>
+                    <div *ngIf="sendForm.controls['amount'].errors['great_than_unwraped_coins']">
+                        {{ 'SEND.FORM_ERRORS.GREAT_THAN_UNWRAPPED_COINS' | translate }}
+                    </div>
+                    <div *ngIf="sendForm.controls['amount'].errors['less_than_infinium_needed']">
+                        {{ 'SEND.FORM_ERRORS.LESS_THAN_INF_NEEDED' | translate }}
+                    </div>
+                    <div *ngIf="sendForm.controls['amount'].errors['wrap_info_null']">
+                        {{ 'SEND.FORM_ERRORS.WRAP_INFO_NULL' | translate }}
+                    </div>
+                    <div *ngIf="sendForm.controls['amount'].hasError('required')">
+                        {{ 'SEND.FORM_ERRORS.AMOUNT_REQUIRED' | translate }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form__field">
+            <label for="send-comment">{{ 'SEND.COMMENT' | translate }}</label>
+            <input type="text"
+                   class="form__field--input"
+                   id="send-comment"
+                   formControlName="comment"
+                   placeholder="{{ 'PLACEHOLDERS.COMMENT_PLACEHOLDER' | translate }}"
+                   [maxLength]="variablesService.maxCommentLength"
+                   (contextmenu)="variablesService.onContextMenu($event)">
+            <div class="error"
+                 *ngIf="sendForm.get('comment').value && sendForm.get('comment').value.length >= variablesService.maxCommentLength">
+                {{ 'SEND.FORM_ERRORS.MAX_LENGTH' | translate }}
+            </div>
+        </div>
+
+        <div *ngIf="isWrapShown && wrapInfo && !isLoading"
+             class="wrap mt-2 mb-2 p-2">
+            <div class="title">
+                {{ 'SEND.WRAP.TITLE' | translate }}
+                <i class="icon info-circle"></i>
+            </div>
+            <div class="text-wrap">
+                {{ 'SEND.WRAP.MAIN_TEXT' | translate }}
+            </div>
+            <div class="title">{{ 'SEND.WRAP.ESTIMATE' | translate }}</div>
+            <table class="text-wrap">
+                <tr>
+                    <td>{{ 'SEND.WRAP.WILL_RECEIVE' | translate }}</td>
+                    <td *ngIf="!sendForm.controls['amount'].errors">{{getReceivedValue() | intToMoney}} {{ 'SEND.WRAP.wINF' |
+                          translate }}</td>
+                    <td *ngIf="sendForm.controls['amount'].errors">-</td>
+                </tr>
+                <tr>
+                    <td>{{ 'SEND.WRAP.FEE' | translate }}</td>
+                    <td>
+                        {{wrapInfo?.tx_cost?.infinium_needed_for_erc20 | intToMoney: 3 }}
+                        {{ 'SEND.WRAP.INF' | translate }}(${{wrapInfo?.tx_cost?.usd_needed_for_erc20}})
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="details mb-2">
+            <button type="button"
+                    class="header"
+                    [class.border-radius-all]="!additionalOptions"
+                    (click)="toggleOptions()">
+                <span>{{ 'SEND.DETAILS' | translate }}</span>
+                <i class="icon ml-1"
+                   [class.dropdown-arrow-down]="!additionalOptions"
+                   [class.dropdown-arrow-up]="additionalOptions"></i>
+            </button>
+
+            <div class="content"
+                 *ngIf="additionalOptions">
+                <div class="form__field--row">
+                    <div class="form__field">
+                        <label for="send-mixin">{{ 'SEND.MIXIN' | translate }}</label>
+                        <input type="text"
+                               class="form__field--input"
+                               id="send-mixin"
+                               formControlName="mixin"
+                               [placeholder]="'PLACEHOLDERS.AMOUNT_PLACEHOLDER' | translate"
+                               appInputValidate="integer"
+                               (contextmenu)="variablesService.onContextMenu($event)">
+                        <div class="error"
+                             *ngIf="sendForm.controls['mixin'].invalid && (sendForm.controls['mixin'].dirty || sendForm.controls['mixin'].touched)">
+                            <div *ngIf="sendForm.controls['mixin'].hasError('required')">
+                                {{ 'SEND.FORM_ERRORS.AMOUNT_REQUIRED' | translate }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="send-fee">{{ 'SEND.FEE' | translate }}</label>
+                        <input type="text"
+                               class="form__field--input"
+                               id="send-fee"
+                               formControlName="fee"
+                               [placeholder]="'PLACEHOLDERS.FEE_PLACEHOLDER' | translate"
+                               appInputValidate="money"
+                               (contextmenu)="variablesService.onContextMenu($event)">
+                        <div class="error"
+                             *ngIf="sendForm.controls['fee'].invalid && (sendForm.controls['fee'].dirty || sendForm.controls['fee'].touched)">
+                            <div *ngIf="sendForm.controls['fee'].errors['less_min']">
+                                {{ 'SEND.FORM_ERRORS.FEE_MINIMUM' | translate : { fee: variablesService.default_fee } }}
+                            </div>
+                            <div *ngIf="sendForm.controls['fee'].hasError('required')">
+                                {{ 'SEND.FORM_ERRORS.FEE_REQUIRED' | translate }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <app-checkbox class="mt-1"
+                              [value]="hideWalletAddress || sendForm.controls['hide'].value"
+                              formControlName="hide"
+                              [label]="'SEND.HIDE' | translate"></app-checkbox>
+            </div>
+        </div>
+
+        <button type="submit"
+                class="primary big max-w-19-rem w-100"
+                [disabled]="!sendForm.valid || !variablesService.currentWallet.loaded">
+            {{'SEND.BUTTON' | translate }}
+        </button>
+    </form>
+</div>
+
+<app-send-modal *ngIf="isModalDialogVisible"
+                [form]="sendForm"
+                (confirmed)="confirmed($event)"></app-send-modal>
+
+<app-send-details-modal [job_id]="job_id"
+                        *ngIf="isModalDetailsDialogVisible"
+                        (close)="handeCloseDetailsModal()"></app-send-details-modal>

@@ -1,0 +1,50 @@
+<div class="form__field mb-2">
+    <label>Default</label>
+    <ng-select [items]="scaleItems"
+               bindValue="value"
+               bindLabel="name"
+               [clearable]="false"
+               [searchable]="false">
+        <ng-template ng-label-tmp let-item="item">
+            {{item.name | translate}}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            {{item.name | translate}}
+        </ng-template>
+    </ng-select>
+</div>
+
+<div class="form__field">
+    <label>With circle</label>
+    <ng-select [items]="scaleItems"
+               class="with-circle"
+               bindValue="value"
+               bindLabel="name"
+               [clearable]="false"
+               [searchable]="false">
+        <ng-template ng-label-tmp let-item="item">
+            {{item.name | translate}}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            {{item.name | translate}}
+        </ng-template>
+    </ng-select>
+</div>
+
+<h3 class="mb-1">if you use formControlName class ng-invalid set red border if select ng-touched</h3>
+<div class="form__field">
+    <label>With error</label>
+    <ng-select [items]="scaleItems"
+               class="with-circle invalid"
+               bindValue="value"
+               bindLabel="name"
+               [clearable]="false"
+               [searchable]="false">
+        <ng-template ng-label-tmp let-item="item">
+            {{item.name | translate}}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            {{item.name | translate}}
+        </ng-template>
+    </ng-select>
+</div>

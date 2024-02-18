@@ -1,0 +1,42 @@
+<div class="modal p-2 border-radius-0_8-rem bg-light-blue max-w-34-rem max-h-100 w-100 scrolled-content">
+    <div class="wrapper w-100">
+        <h3 class="mb-2">{{ 'OPEN_WALLET.MODAL.TITLE' | translate }}</h3>
+
+        <div class="word-break-break-all mb-2">{{ wallet.name }}</div>
+        <div class="word-break-break-all mb-2">{{ wallet.path }}</div>
+
+        <form fxLayout="column"
+              class="form"
+              (ngSubmit)="openWallet()">
+
+            <div class="form__field"
+                 *ngIf="!wallet.notFound">
+                <label for="password">{{ 'OPEN_WALLET.MODAL.LABEL' | translate }}</label>
+                <input class="form__field--input"
+					   (contextmenu)="variablesService.onContextMenuPasteSelect($event)"
+					   (input)="wallet.wrongPassword = false"
+					   [(ngModel)]="wallet.pass"
+					   id="password"
+					   name="password"
+					   type="password"/>
+				<div *ngIf="wallet.notFound"
+					 class="error">
+					{{ 'OPEN_WALLET.MODAL.NOT_FOUND' | translate }}
+				</div>
+				<div *ngIf="wallet.wrongPassword"
+					 class="error">
+					{{ 'ERRORS.WRONG_PASSWORD' | translate }}
+				</div>
+			</div>
+
+            <div fxLayout="row nowrap" fxLayoutGap="1rem">
+                <button type="submit"
+                        class="primary big w-100"
+                        [disabled]="wallet.notFound">{{ 'OPEN_WALLET.MODAL.OPEN' | translate }}</button>
+                <button type="button"
+                        class="outline big w-100"
+                        (click)="skipWallet()">{{ 'OPEN_WALLET.MODAL.SKIP' | translate }}</button>
+            </div>
+        </form>
+    </div>
+</div>

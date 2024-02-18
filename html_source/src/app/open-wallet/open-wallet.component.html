@@ -1,0 +1,75 @@
+<div class="page-container">
+
+	<div class="toolbar mb-2">
+		<div class="left">
+			<button (click)="back()"
+					class="btn-icon circle big mr-2"
+					type="button">
+				<i class="icon dropdown-arrow-left"></i>
+			</button>
+			<h1>{{ 'BREADCRUMBS.OPEN_WALLET' | translate }}</h1>
+		</div>
+		<div class="right"></div>
+	</div>
+
+	<div class="page-content">
+		<div class="breadcrumbs mb-2">
+			<div class="breadcrumb">
+				<a [routerLink]="['/add-wallet']">{{'BREADCRUMBS.ADD_WALLET' | translate }}</a>
+			</div>
+			<div class="breadcrumb">
+				<span>{{'BREADCRUMBS.OPEN_WALLET' | translate}}</span>
+			</div>
+		</div>
+
+		<div class="scrolled-content">
+			<form [formGroup]="openForm"
+				  (ngSubmit)="openWallet()"
+				  class="form">
+
+				<div class="form__field">
+					<label for="wallet-name">{{ 'OPEN_WALLET.NAME' | translate }}</label>
+					<input (contextmenu)="variablesService.onContextMenu($event)"
+						   [maxLength]="variablesService.maxWalletNameLength"
+						   [placeholder]="'PLACEHOLDERS.WALLET_NAME_PLACEHOLDER' | translate"
+						   class="form__field--input"
+						   formControlName="name"
+						   id="wallet-name"
+						   type="text">
+					<div *ngIf="openForm.controls['name'].invalid && (openForm.controls['name'].dirty || openForm.controls['name'].touched)"
+						 class="error">
+						<div *ngIf="openForm.controls['name'].errors['duplicate']">
+							{{ 'OPEN_WALLET.FORM_ERRORS.NAME_DUPLICATE' | translate }}
+						</div>
+						<div *ngIf="openForm.controls['name'].errors['required']">
+							{{ 'OPEN_WALLET.FORM_ERRORS.NAME_REQUIRED' | translate }}
+						</div>
+					</div>
+					<div *ngIf="openForm.get('name').value.length > variablesService.maxWalletNameLength"
+						 class="error">
+						{{ 'OPEN_WALLET.FORM_ERRORS.MAX_LENGTH' | translate }}
+					</div>
+				</div>
+
+				<div class="form__field">
+					<label for="wallet-password">{{ 'OPEN_WALLET.PASS' | translate }}</label>
+					<input (contextmenu)="variablesService.onContextMenuPasteSelect($event)"
+						   class="form__field--input"
+						   formControlName="password"
+						   id="wallet-password"
+						   placeholder="{{ 'PLACEHOLDERS.PASS_PLACEHOLDER' | translate }}"
+						   type="password">
+					<div *ngIf="submitted && openForm.controls['password'].hasError('wrong_password')"
+						 class="error">
+						{{ openForm.controls['password']?.errors['wrong_password']?.text }}
+					</div>
+				</div>
+
+
+				<button [disabled]="!openForm.valid"
+						class="primary big max-w-19-rem w-100"
+						type="submit">{{'OPEN_WALLET.BUTTON' | translate }}</button>
+			</form>
+		</div>
+	</div>
+</div>

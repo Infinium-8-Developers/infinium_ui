@@ -1,0 +1,30 @@
+<div class="modal p-2 border-radius-0_8-rem bg-light-blue max-w-34-rem w-100 max-h-100">
+    <button type="button"
+            class="close"
+            (click)="onClose()"><i class="icon close"></i></button>
+
+    <div class="content mb-2"
+         fxLayout="row"
+         fxLayoutAlign="start center">
+        <i class="icon min-width-4_4-rem min-height-4_4-rem mr-1"
+           fxFlex="0 0 auto"
+           [class.error]="type === 'error'"
+           [class.success]="type === 'success'"
+           [class.info]="type === 'info'"></i>
+        <div class="message-container">
+			<h3 class="title">{{title}}</h3>
+			<p class="message">
+				{{ message }}
+			</p>
+		</div>
+    </div>
+
+    <div class="controls"
+         fxLayout="row"
+         fxLayoutAlign="center center">
+        <button type="button"
+                class="primary max-w-19-rem w-100 big"
+                (click)="onClose()"
+                #btn>{{ 'MODALS.OK' | translate }}</button>
+    </div>
+</div>

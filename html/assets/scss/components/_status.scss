@@ -23,7 +23,7 @@ app-synchronization-status {
         padding-left: 2.2rem;
 
         &:before {
-          content: '';
+          content: "";
           position: absolute;
           top: 50%;
           left: 0;
@@ -43,8 +43,7 @@ app-synchronization-status {
       background-color: var(--aqua-500);
     }
 
-    .syncing,
-    .loading {
+    .syncing, .loading {
       font-size: 1.4rem;
       line-height: 1.2;
     }
@@ -85,26 +84,26 @@ app-synchronization-status {
         background-color: var(--aqua-500);
         animation: move 5s linear infinite;
         background-image: -webkit-gradient(
-            linear,
-            0 0,
-            100% 100%,
-            color-stop(0.125, rgba(0, 0, 0, 0.15)),
-            color-stop(0.125, transparent),
-            color-stop(0.25, transparent),
-            color-stop(0.25, rgba(0, 0, 0, 0.1)),
-            color-stop(0.375, rgba(0, 0, 0, 0.1)),
-            color-stop(0.375, transparent),
-            color-stop(0.5, transparent),
-            color-stop(0.5, rgba(0, 0, 0, 0.15)),
-            color-stop(0.625, rgba(0, 0, 0, 0.15)),
-            color-stop(0.625, transparent),
-            color-stop(0.75, transparent),
-            color-stop(0.75, rgba(0, 0, 0, 0.1)),
-            color-stop(0.875, rgba(0, 0, 0, 0.1)),
-            color-stop(0.875, transparent),
-            to(transparent)
-          ),
-          -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.125, rgba(0, 0, 0, 0.3)), color-stop(0.125, transparent), color-stop(0.25, transparent), color-stop(0.25, rgba(0, 0, 0, 0.25)), color-stop(0.375, rgba(0, 0, 0, 0.25)), color-stop(0.375, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(0, 0, 0, 0.3)), color-stop(0.625, rgba(0, 0, 0, 0.3)), color-stop(0.625, transparent), color-stop(0.75, transparent), color-stop(0.75, rgba(0, 0, 0, 0.25)), color-stop(0.875, rgba(0, 0, 0, 0.25)), color-stop(0.875, transparent), to(transparent));
+                        linear,
+                        0 0,
+                        100% 100%,
+                        color-stop(0.125, rgba(0, 0, 0, 0.15)),
+                        color-stop(0.125, transparent),
+                        color-stop(0.25, transparent),
+                        color-stop(0.25, rgba(0, 0, 0, 0.1)),
+                        color-stop(0.375, rgba(0, 0, 0, 0.1)),
+                        color-stop(0.375, transparent),
+                        color-stop(0.5, transparent),
+                        color-stop(0.5, rgba(0, 0, 0, 0.15)),
+                        color-stop(0.625, rgba(0, 0, 0, 0.15)),
+                        color-stop(0.625, transparent),
+                        color-stop(0.75, transparent),
+                        color-stop(0.75, rgba(0, 0, 0, 0.1)),
+                        color-stop(0.875, rgba(0, 0, 0, 0.1)),
+                        color-stop(0.875, transparent),
+                        to(transparent)
+        ),
+        -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.125, rgba(0, 0, 0, 0.3)), color-stop(0.125, transparent), color-stop(0.25, transparent), color-stop(0.25, rgba(0, 0, 0, 0.25)), color-stop(0.375, rgba(0, 0, 0, 0.25)), color-stop(0.375, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(0, 0, 0, 0.3)), color-stop(0.625, rgba(0, 0, 0, 0.3)), color-stop(0.625, transparent), color-stop(0.75, transparent), color-stop(0.75, rgba(0, 0, 0, 0.25)), color-stop(0.875, rgba(0, 0, 0, 0.25)), color-stop(0.875, transparent), to(transparent));
         background-size: 7rem 7rem;
         height: 100%;
       }

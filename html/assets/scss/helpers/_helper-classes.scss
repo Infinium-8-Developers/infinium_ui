@@ -50,59 +50,31 @@
   background-color: var(--blue-500);
 }
 
-.background-none {
-  background: none;
-}
-
 // overflow
 .overflow-hidden {
   overflow: hidden;
 }
 
-.overflow-auto {
+.overflow-auto{
   overflow: auto;
 }
 
-.overflow-x-hidden {
+.overflow-x-hidden{
   overflow-x: hidden;
 }
 
-.overflow-y-hidden {
+.overflow-y-hidden{
   overflow-y: hidden;
 }
 
-.overflow-x-auto {
+.overflow-x-auto{
   overflow-x: auto;
 }
 
-.overflow-y-auto {
+.overflow-y-auto{
   overflow-y: auto;
 }
 
 .no-scroll {
   overflow: hidden;
-}
-
-.rotate-90 {
-  transform: rotate(90deg);
-}
-
-.rotate-180 {
-  transform: rotate(180deg);
-}
-
-.rotate-270 {
-  transform: rotate(270deg);
-}
-
-.rotate-360 {
-  transform: rotate(360deg);
-}
-
-.opacity-0 {
-  opacity: 0;
-}
-
-.opacity-1 {
-  opacity: 1;
 }

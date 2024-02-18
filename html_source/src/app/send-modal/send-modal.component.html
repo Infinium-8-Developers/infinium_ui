@@ -1,0 +1,80 @@
+<div class="modal p-2 border-radius-0_8-rem bg-light-blue max-w-54-rem w-100 max-h-100"
+     fxLayout="row">
+    <div class="wrapper">
+        <form class="overflow-hidden"
+              fxLayout="column"
+              fxFlexFill
+              [formGroup]="confirmForm"
+              (ngSubmit)="submit()">
+            <h3 class="title mb-2"
+                fxFlex="0 0 auto">{{ 'CONFIRM.TITLE' | translate }}</h3>
+
+            <div class="content mb-2 w-100 overflow-x-hidden overflow-y-auto"
+                 fxFlex="1 1 auto">
+                <div class="table-info mb-2">
+                    <div class="row">
+                        <div class="label max-w-19-rem w-100">{{ 'CONFIRM.MESSAGE.SEND' | translate }}</div>
+                        <div class="text">{{ form.get('amount').value }} {{variablesService.defaultCurrency}}</div>
+                    </div>
+
+                    <hr class="separator"/>
+
+                    <div class="row">
+                        <div class="label max-w-19-rem w-100">{{ 'CONFIRM.MESSAGE.FROM' | translate }}</div>
+                        <div class="text">{{ variablesService.currentWallet.address }}</div>
+                    </div>
+
+                    <hr class="separator"/>
+
+                    <div class="row">
+                        <div class="label max-w-19-rem w-100">{{ 'CONFIRM.MESSAGE.TO' | translate }}</div>
+                        <div class="text">{{ form.get('address').value }}</div>
+                    </div>
+
+                    <ng-container *ngIf="!!form.get('comment').value">
+                        <hr class="separator"/>
+
+                        <div class="row">
+                            <div class="label max-w-19-rem w-100">{{ 'CONFIRM.MESSAGE.COMMENT' | translate }}</div>
+                            <div class="text">{{ form.get('comment').value }}</div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="form__field mb-0"
+                     *ngIf="variablesService.appPass">
+                    <label for="password">{{ 'LOGIN.MASTER_PASS' | translate }}</label>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           formControlName="password"
+                           class="form__field--input"
+                           [placeholder]="'PLACEHOLDERS.MASTER_PASS_PLACEHOLDER' | translate"
+                           autofocus
+                           (contextmenu)="variablesService.onContextMenuPasteSelect($event)"/>
+                    <div class="error"
+						 *ngIf="confirmForm.controls['password'].invalid && (confirmForm.controls['password'].dirty || confirmForm.controls['password'].touched) || submitted">
+						<div
+							*ngIf="confirmForm.controls['password'].hasError('passwordNotMatch')">
+							{{ 'LOGIN.FORM_ERRORS.WRONG_PASSWORD' | translate }}
+						</div>
+						<div *ngIf="confirmForm.controls['password'].hasError('requiredPass')">
+							{{ 'LOGIN.FORM_ERRORS.PASS_REQUIRED' | translate }}
+						</div>
+					</div>
+                </div>
+            </div>
+
+            <div class="controls w-100"
+                 fxLayout="row nowrap"
+                 fxLayoutGap="1rem"
+                 fxFlex="0 0 auto">
+                <button type="button"
+                        class="outline big w-100"
+                        (click)="onClose()">{{ 'CONFIRM.BUTTON_CANCEL' | translate }}</button>
+                <button type="submit"
+                        class="primary big w-100">{{ 'CONFIRM.BUTTON_CONFIRM' | translate }}</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+<div class="chart-wrap"
+     fxLayout="column"
+     fxFlexFill>
+    <div class="scrolled-content h-100"
+         fxLayout="column"
+         fxFlex="1 1 auto">
+        <div class="chart-header mb-1"
+             fxFlex="0 0 auto"
+             fxLayout="column">
+            <div class="row"
+                 fxFlex="0 0 auto"
+                 fxLayoutGap="1rem"
+                 fxLayout="row nowrap"
+                 fxLayoutAlign="space-between start">
+                <div class="left"
+                     fxFlex="1 1 calc(50% - 0.5rem)"
+                     fxLayout="row wrap"
+                     fxLayoutAlign="start center"
+                     fxLayoutGap="1rem">
+
+                    <div class="items"
+                         fxLayout="row wrap"
+                         fxLayoutGap="1rem">
+                        <div
+                              class="item overflow-hidden p-1 border-radius-0_8-rem mb-1"
+                              fxLayout="row nowrap"
+                              fxLayoutAlign="space-between center"
+                              *ngIf="(!variablesService.currentWallet.is_auditable && !variablesService.currentWallet.is_watch_only)
+                  || (variablesService.currentWallet.is_auditable && !variablesService.currentWallet.is_watch_only)">
+                            <div
+                                  class="left overflow-hidden mr-1"
+                                  fxLayout="row"
+                                  fxLayoutAlign="start center">{{ 'STAKING.TITLE' | translate }}</div>
+
+                            <div class="right overflow-hidden w-100"
+                                 fxLayout="row"
+                                 fxLayoutAlign="end center">
+                                <app-staking-switch
+                                      [wallet_id]="variablesService.currentWallet.wallet_id"
+                                      [(staking)]="variablesService.currentWallet.staking">
+                                </app-staking-switch>
+                            </div>
+                        </div>
+                        <div
+                              class="item overflow-hidden p-1 border-radius-0_8-rem mb-1"
+                              fxLayout="row nowrap"
+                              fxLayoutAlign="space-between center">
+                            <div
+                                  class="left overflow-hidden mr-1"
+                                  fxLayout="row"
+                                  fxLayoutAlign="start center">{{ 'STAKING.TITLE_PENDING' | translate }}
+                                :
+                            </div>
+                            <div class="right overflow-hidden w-100"
+                                 fxLayout="row"
+                                 fxLayoutAlign="end center">
+                                <div class="text-ellipsis mr-1">{{pending.total | intToMoney}}</div>
+                                {{variablesService.defaultCurrency}}</div>
+                        </div>
+                        <div
+                              class="item overflow-hidden p-1 border-radius-0_8-rem mb-1"
+                              fxLayout="row nowrap"
+                              fxLayoutAlign="space-between center">
+                            <div
+                                  class="left overflow-hidden mr-1"
+                                  fxLayout="row"
+                                  fxLayoutAlign="start center">{{ 'STAKING.TITLE_TOTAL' | translate }}
+                                :
+                            </div>
+                            <div class="right overflow-hidden w-100"
+                                 fxLayout="row"
+                                 fxLayoutAlign="end center">
+                                <div class="text-ellipsis mr-1">{{total | intToMoney}}</div>
+                                {{variablesService.defaultCurrency}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right"
+                     fxFlex="1 1 calc(50% - 0.5rem)"
+                     fxLayout="row"
+                     fxLayoutAlign="end center"
+                     fxLayoutGap="1rem">
+                    <div class="selected overflow-hidden"
+                         fxHide
+                         fxShow.xl
+                         fxShow.lg
+                         *ngIf="selectedDate && selectedDate.date">
+                        <div fxLayout="row" class="overflow-hidden">
+                            <div class="text-ellipsis">{{selectedDate.date | date : 'EEEE, MMMM d, y'}}
+                            {{selectedDate.amount}}</div>
+                            <div class="ml-0_5">{{variablesService.defaultCurrency}}</div>
+                        </div>
+                    </div>
+
+                    <ng-select class="selected-group max-w-19-rem w-100"
+                               [items]="groups"
+                               bindValue="key"
+                               bindLabel="title"
+                               [(ngModel)]="selectedGroup"
+                               [clearable]="false"
+                               [searchable]="false"
+                               (change)="changeGroup($event)">
+                        <ng-template ng-label-tmp
+                                     let-item="item">
+                            Sort by {{(item.title | translate | lowercase) + 's'}}
+                        </ng-template>
+                        <ng-template ng-option-tmp
+                                     let-item="item"
+                                     let-index="index">
+                            {{item.title | translate}}
+                        </ng-template>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row"
+                 fxShow
+                 fxHide.xl
+                 fxHide.lg
+                 fxFlex="0 0 2rem"
+                 fxLayoutGap="1rem"
+                 fxLayout="row nowrap"
+                 fxLayoutAlign="space-between center">
+                <div class="left"></div>
+                <div class="right"
+                     fxLayoutAlign="end center">
+                    <div class="selected overflow-hidden"
+                         *ngIf="selectedDate && selectedDate.date">
+                        <div fxLayout="row" class="overflow-hidden">
+                            <div class="text-ellipsis">{{selectedDate.date | date : 'EEEE, MMMM d, y'}}
+                                {{selectedDate.amount}}</div>
+                            <div class="ml-0_5">{{variablesService.defaultCurrency}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart border-radius-0_8-rem"
+             fxFlex="1 1 auto"
+             fxLayoutAlign=" center">
+            <div [chart]="chart"></div>
+        </div>
+
+        <div class="chart-options mt-2"
+             fxFlex="0 0 auto"
+             fxLayoutAlign=" center">
+            <ng-container *ngFor="let period of periods; let last = last">
+                <button type="button"
+                        class="big w-100"
+                        [class.outline]="!last"
+                        [class.primary]="last"
+                        [class.mr-1]="!last"
+                        [class.active]="period.active"
+                        (click)="changePeriod(period)">{{period.title}}</button>
+            </ng-container>
+        </div>
+    </div>
+</div>

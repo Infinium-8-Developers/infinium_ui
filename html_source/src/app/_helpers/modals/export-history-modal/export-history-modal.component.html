@@ -1,0 +1,57 @@
+<div class="modal p-2 border-radius-0_8-rem bg-light-blue max-h-100 overflow-hidden"
+     fxFlex="0 1 54rem"
+     fxLayout="column"
+     fxLayoutAlign="start stretch">
+    <form class="form overflow-x-hidden overflow-y-auto"
+          fxLayout="column"
+          fxLayoutAlign="start stretch">
+        <h4 class="text-ellipsis mb-2"
+            fxFlex="0 0 auto">
+            {{ 'EXPORT_HISTORY.TITLE' | translate }}
+        </h4>
+
+        <div class="content mb-2"
+             fxFlex="1 1 auto">
+            <div class="form__field">
+                <label>Format:</label>
+                <ng-select [items]="exportFormats"
+                           bindValue="format"
+                           bindLabel="formatName"
+                           name="format"
+                           [(ngModel)]="currentFormat"
+                           [clearable]="false"
+                           [searchable]="false">
+                    <ng-template ng-label-tmp
+                                 let-item="item">
+                        {{item.formatName}}
+                    </ng-template>
+                    <ng-template ng-option-tmp
+                                 let-item="item"
+                                 let-index="index">
+                        {{item.formatName}}
+                    </ng-template>
+                </ng-select>
+            </div>
+
+            <div class="mb-2"
+                 fxLayout="row"
+                 fxLayoutAlign="start center">
+                <span class="color-primary mr-1">{{ 'EXPORT_HISTORY.FILTER' | translate }}</span>
+                <app-switch [value]="posFilterIsOn"
+                            (emitChange)="posFilterIsOn = !posFilterIsOn"></app-switch>
+            </div>
+        </div>
+
+        <div class="controls"
+             fxFlex="0 0 auto"
+             fxLayout="row"
+             fxLayoutAlign="space-between center">
+            <button type="submit"
+                    class="primary big w-100 mr-0_5"
+                    (click)="confirmExport()">{{ 'EXPORT_HISTORY.EXPORT' | translate }}</button>
+            <button type="button"
+                    class="outline big w-100 ml-0_5"
+                    (click)="closeModal()">{{ 'EXPORT_HISTORY.CANCEL' | translate }}</button>
+        </div>
+    </form>
+</div>
